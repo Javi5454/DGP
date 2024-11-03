@@ -169,3 +169,5 @@ media/
 
 #Migrations
 migrations/
+
+!.gitignore
