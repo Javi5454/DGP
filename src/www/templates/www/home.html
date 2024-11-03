@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido - CBP</title>
+    <!-- Bootstrap CSS -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <!-- Archivo CSS personalizado -->
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+
+<body class="body-centered">
+    <div class="welcome-container">
+        <div class="container">
+            <div class="row">
+                <h1 class="welcome-title">Classroom Brought to People</h1>
+            </div>
+            <div class="row text-center">
+                <!-- Logo de la aplicación -->
+                <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo mx-auto d-block">
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- Botón de inicio de sesión administrador -->
+                    <a href="{% url 'login' %}" class="btn btn-login-admin btn-lg">Iniciar sesión administrador</a>
+                </div>
+                <div class="col-sm-6">
+                    <!-- Botón de inicio de sesión alumno -->
+                <a href="#" class="btn btn-login-alumno btn-lg">Iniciar sesión alumno</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

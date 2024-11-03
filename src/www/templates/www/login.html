@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - CBP</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+<body class="body-centered">
+    <div class="welcome-container">
+        <!-- Logo de la aplicación -->
+        <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+
+        <!-- Título de la página de inicio de sesión -->
+        <h3 class="text-center mb-4">Iniciar Sesión</h3>
+
+        <!-- Formulario de inicio de sesión -->
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+            {% if messages %}
+                <div class="alert alert-danger mt-2">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-login-admin btn-block mt-3">Iniciar Sesión</button>
+        </form>
+    </div>
+</body>
+</html>
