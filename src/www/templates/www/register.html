@@ -11,13 +11,16 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
-<body class="body-centered">
-    <div class="welcome-container no-hover-effect">
+<body class="body-centered body-centered-register">
+    <!-- Botón REGISTRO CON PICTOGRAMAS -->
+    <a href="/registerpictogram" class="pictogramas-button pictogramas-button-register">
+        <span>REGISTRO CON PICTOGRAMAS</span>
+        <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="button-image">
+    </a>
+
+    <div class="welcome-container no-hover-effect register-container">
         <!-- Logo de la aplicación -->
         <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
-
-        <!-- Título de la página de registro -->
-        <h3 class="text-center mb-4">Registro</h3>
 
         <!-- Formulario de registro -->
         <form method="post" action="{% url 'register' %}">
@@ -44,7 +47,7 @@
                 </div>
             {% endif %}
 
-            <button type="submit" class="btn btn-login-admin btn-block mt-3">Registrarse</button>
+            <button type="submit" class="btn btn-login-admin btn-block mt-3 btn-register">REGISTRAR USUARIO</button>
         </form>
     </div>
 </body>
