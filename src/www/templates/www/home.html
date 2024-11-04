@@ -16,23 +16,27 @@
 </head>
 
 <body class="body-centered">
-    <div class="welcome-container">
-        <div class="container">
-            <div class="row">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!-- Contenedor de inicio de sesión alumno -->
+            <div class="welcome-container col-sm-3">
                 <h1 class="welcome-title">Classroom Brought to People</h1>
-            </div>
-            <div class="row text-center">
-                <!-- Logo de la aplicación -->
-                <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo mx-auto d-block">
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <!-- Botón de inicio de sesión administrador -->
-                    <a href="{% url 'login' %}" class="btn btn-login-admin btn-lg">Iniciar sesión administrador</a>
+                <div class="text-center">
+                    <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo mx-auto d-block">
                 </div>
-                <div class="col-sm-6">
-                    <!-- Botón de inicio de sesión alumno -->
-                <a href="#" class="btn btn-login-alumno btn-lg">Iniciar sesión alumno</a>
+                <div class="text-center">
+                    <a href="#" class="btn btn-login-alumno btn-lg">Iniciar sesión alumno</a>
+                </div>
+            </div>
+
+            <!-- Contenedor de inicio de sesión administrador -->
+            <div class="admin-container col-sm-3">
+                <h1 class="welcome-title">Classroom Brought to People</h1>
+                <div class="text-center">
+                    <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo mx-auto d-block">
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'login' %}" class="btn btn-login-admin btn-lg">Iniciar sesión como administrador</a>
                 </div>
             </div>
         </div>

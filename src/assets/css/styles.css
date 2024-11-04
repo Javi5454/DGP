@@ -17,59 +17,39 @@ body {
 }
 
 /* Para nuestras páginas no dashboard*/
-.body-centered{
+.body-centered {
     justify-content: center;
     align-items: center;
 }
 
 /* Contenedor de bienvenida */
-.welcome-container {
+.welcome-container, .admin-container {
     text-align: center;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: var(--light-blue);
+    max-width: 300px;
+    margin: 10px;
+}
+
+/* Contenedor de inicio de sesión administrador */
+.admin-container {
+    background-color: var(--orange);
 }
 
 /* Título principal */
 .welcome-title {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     color: var(--dark-blue);
     margin-bottom: 20px;
 }
 
-/* Mensaje de bienvenida en la esquina superior izquierda */
-.welcome-message {
-    color: var(--navy);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: var(--light-blue);
-    font-weight: bold;
-    margin: 0;
-}
-
-/* Para ajustar el fondo de la bienvenida */
-.welcome-background{
-    display: inline-block; /* Permite que el fondo se ajuste al tamaño del contenido */
-}
-
 /* Logo */
 .logo {
-    max-width: 150px;
+    max-width: 100px;
     margin-bottom: 20px;
-}
-
-/* Botón de inicio de sesión adminsitrador */
-.btn-login-admin {
-    background-color: var(--orange);
-    color: #fff;
-    border: none;
-}
-
-.btn-login:hover{
-    background-color: var(--dark-blue);
-    color: #fff;
 }
 
 /* Botón de inicio de sesión alumno */
@@ -77,37 +57,25 @@ body {
     background-color: var(--lighter-blue);
     color: var(--dark-blue);
     border: none;
+    display: block;
+    width: 100%;
 }
 
-.btn-login-alumno:hover{
+.btn-login-alumno:hover {
     background-color: var(--dark-blue);
     color: #fff;
 }
 
-/* Estilos para la barra de navegación fija */
-.navbar-logo {
-    max-height: 40px;
-}
-
-/* Estilos para la barra de navegación inferior */
-.custom-navbar {
-    background-color: var(--orange);
-    color: #fff;
-}
-
-/* Logo dentro de la navbar */
-.navbar-logo {
-    max-height: 40px;
-}
-
-/* Estilos para el botón de logout */
-.custom-logout-btn {
-    background-color: var(--orange);
-    color: #fff;
+/* Botón de inicio de sesión administrador */
+.btn-login-admin {
+    background-color: #ffffff;
+    color: var(--orange);
     border: none;
+    display: block;
+    width: 100%;
 }
 
-.custom-logout-btn:hover {
-    background-color: var(--light-blue);
-    color: var(--dark-blue);
+.btn-login-admin:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
 }
