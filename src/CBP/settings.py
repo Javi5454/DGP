@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'www.apps.WwwConfig',
     'logic.apps.LogicConfig',
-    'bootstrap5'
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -56,11 +56,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'CBP.urls'
 
 TEMPLATES_WWW_PATH = os.path.join(BASE_DIR, 'www/templates/www')
+TEMPLATES_LOGIC_PATH = os.path.join(BASE_DIR, 'logic/templates/logic')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_WWW_PATH],
+        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_LOGIC_PATH],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

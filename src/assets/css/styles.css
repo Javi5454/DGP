@@ -79,3 +79,17 @@ body {
     background-color: var(--dark-blue);
     color: #fff;
 }
+
+/* Botón de inicio de sesión administrador relleno */
+.btn-login-admin-orange {
+    background-color: var(--orange);
+    color: #fff;
+    border: none;
+    display: block;
+    width: 100%;
+}
+
+.btn-login-admin-orange:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
+}
