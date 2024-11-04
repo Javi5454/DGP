@@ -1,84 +1,90 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 
-# Página de bienvenida
+# Función para verificar si el usuario es un administrador
+def is_admin(user):
+    return user.is_staff
+
+# Página de bienvenida accesible para todos, muestra opciones de login
 def home(request):
-    if request.user.is_authenticated:
-        return redirect('dashboard')
     return render(request, "www/home.html")
 
-# Vista para seleccionar el tipo de registro
-def home_register(request):
-    return render(request, "www/home_register.html")
-
-# Vista de inicio de sesión clásico
+# Vista de inicio de sesión clásico con redirección condicional
 def login_view(request):
     if request.method == "POST":
-        # Obtener los datos del formulario
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        
-        # Comprobar autenticación
+
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
+            # Redirige al administrador a `admin_dashboard`, y a otros usuarios al `dashboard`
+            if user.is_staff:
+                return redirect('admin_dashboard')
+            else:
+                return redirect('dashboard')
         else:
-            # Si algo no ha ido bien
             messages.error(request, "Nombre de usuario o contraseña incorrectos")
-    elif request.method == "GET":
-        if request.user.is_authenticated:
-            return redirect('dashboard')
-
     return render(request, 'login.html')
 
-# Vista de registro clásico
+# Dashboard para usuarios generales (estudiantes y profesores)
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+# Dashboard específico para administradores
+@login_required
+@user_passes_test(is_admin)
+def admin_dashboard(request):
+    return render(request, 'admin_dashboard.html')
+
+# Vista para seleccionar el tipo de registro, solo visible para administradores
+@user_passes_test(is_admin)
+def home_register(request):
+    return render(request, "www/home_register.html")
+
+# Vista de registro clásico, solo accesible para administradores
+@user_passes_test(is_admin)
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         password_confirmation = request.POST['password_confirmation']
 
-        # Verificar que las contraseñas coincidan
         if password != password_confirmation:
             messages.error(request, "Las contraseñas no coinciden.")
             return redirect('register')
 
-        # Verificar si el usuario ya existe
         if User.objects.filter(username=username).exists():
             messages.error(request, "El nombre de usuario ya está en uso.")
             return redirect('register')
 
-        # Crear el nuevo usuario
         user = User.objects.create_user(username=username, password=password)
         user.save()
         messages.success(request, "Registro exitoso. Ahora puedes iniciar sesión.")
         return redirect('login')
 
-    # Renderizar la plantilla de registro en caso de petición GET
     return render(request, 'register.html')
 
-# Vista de registro adaptado
+# Vista de registro adaptado, solo accesible para administradores
+@user_passes_test(is_admin)
 def register_adapted(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         password_confirmation = request.POST['password_confirmation']
 
-        # Verificar que las contraseñas coincidan
         if password != password_confirmation:
             messages.error(request, "Las contraseñas no coinciden.")
             return redirect('register_adapted')
 
-        # Verificar si el usuario ya existe
         if User.objects.filter(username=username).exists():
             messages.error(request, "El nombre de usuario ya está en uso.")
             return redirect('register_adapted')
 
-        # Crear el nuevo usuario
         user = User.objects.create_user(username=username, password=password)
         user.save()
         messages.success(request, "Registro adaptado exitoso. Ahora puedes iniciar sesión.")
@@ -90,8 +96,3 @@ def register_adapted(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
-
-# Dashboard
-@login_required  # Decorador para requerir inicio de sesión
-def dashboard(request):
-    return render(request, 'dashboard.html')

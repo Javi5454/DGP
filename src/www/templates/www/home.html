@@ -5,31 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido - CBP</title>
-    <!-- Bootstrap CSS -->
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    <!-- Archivo CSS personalizado -->
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 
 <body class="body-centered">
-    <!-- Título principal de inicio de sesión -->
     <h1 class="main-title">INICIO DE SESIÓN</h1>
 
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <!-- Contenedor de inicio de sesión alumno -->
-            <a href="#" class="welcome-container col-sm-6">
+            <!-- Contenedor de inicio de sesión para alumnos y profesores -->
+            <a href="{% url 'login' %}" class="welcome-container col-sm-6">
                 <h2 class="welcome-title">PICTOGRAMAS</h2>
                 <div class="text-center">
                     <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo mx-auto d-block">
                 </div>
             </a>
 
-            <!-- Contenedor de inicio de sesión administrador -->
+            <!-- Contenedor de inicio de sesión para administradores -->
             <a href="{% url 'login' %}" class="welcome-container col-sm-6">
                 <h2 class="welcome-title">ALFANUMÉRICO</h2>
                 <div class="text-center">
