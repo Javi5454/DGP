@@ -67,11 +67,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* Logo más grande específico para el login */
-.logo-large {
-    max-width: 300px; /* Ajusta el tamaño según tus necesidades */
-}
-
 /* Título */
 .welcome-title {
     font-size: 2em; /* Tamaño de fuente más grande */
