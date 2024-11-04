@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - CBP</title>
+    <title>Registro - CBP</title>
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -11,19 +11,19 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
-<body class="body-centered">
-    <!-- Botón Pictogramas con imagen debajo del texto -->
-    <a href="/login/pictogramas" class="pictogramas-button">
-        <span>PICTOGRAMAS</span>
+<body class="body-centered body-centered-register">
+    <!-- Botón REGISTRO CON PICTOGRAMAS -->
+    <a href="/registerpictogram" class="pictogramas-button pictogramas-button-register">
+        <span>REGISTRO CON PICTOGRAMAS</span>
         <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="button-image">
     </a>
 
-    <div class="welcome-container static-container">
+    <div class="welcome-container no-hover-effect register-container">
         <!-- Logo de la aplicación -->
         <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
 
-        <!-- Formulario de inicio de sesión -->
-        <form method="post" action="{% url 'login' %}">
+        <!-- Formulario de registro -->
+        <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Usuario</label>
@@ -33,6 +33,12 @@
                 <label for="password">Contraseña</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
+            <div class="form-group">
+                <label for="password_confirmation">Confirmar Contraseña</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
+            </div>
+
+            <!-- Mostrar mensajes de error o éxito -->
             {% if messages %}
                 <div class="alert alert-danger mt-2">
                     {% for message in messages %}
@@ -40,7 +46,8 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <button type="submit" class="btn btn-login-admin btn-block mt-3">INICIAR SESIÓN</button>
+
+            <button type="submit" class="btn btn-login-admin btn-block mt-3 btn-register">REGISTRAR USUARIO</button>
         </form>
     </div>
 </body>
