@@ -3,7 +3,7 @@
     --dark-blue: #3d5a80;
     --light-blue: #98c1d9;
     --lighter-blue: #e0fbfc;
-    --orange: #ee6c4d;
+    --orange: #de4f2b;
     --navy: #293241;
     --soft-orange: #f7b683;
     --soft-blue: #9bd0c8;
@@ -23,6 +23,10 @@ body {
 .body-centered {
     justify-content: center;
     align-items: center;
+}
+
+.body-centered-register {
+    background-color: var(--soft-blue) !important;
 }
 
 /* Contenedor de bienvenida como botón */
@@ -48,6 +52,22 @@ body {
     background-color: var(--dark-blue);
     color: #fff;
 }
+
+.welcome-container-register {
+    background-color: var(--soft-orange) !important;
+    color: var(--orange) !important;
+}
+
+.welcome-container-register:hover {
+    background-color: var(--orange) !important;
+    color: #fff !important;
+}
+
+.register-container {
+    background-color: var(--soft-orange) !important;
+    color: var(--orange) !important;
+}
+
 
 /* Estilo específico para agrandar la caja y el texto en login.html */
 .static-container {
@@ -110,9 +130,61 @@ body {
     color: var(--dark-blue); /* Texto azul marino en hover */
 }
 
+/* Estilo para el botón "Registro" */
+.btn-register {
+    border: 2px solid var(--orange) !important; /* Borde naranja */
+    background-color: var(--orange) !important; /* Fondo naranja */
+}
+
+.btn-register:hover {
+    background-color: white !important; /* Fondo blanco al hacer hover */
+    color: var(--orange) !important; /* Texto naranja en hover */
+}
+
 /* Desactivar efecto de hover en contenedores específicos */
 .no-hover-effect:hover {
     background-color: var(--soft-blue); /* Mantener color de fondo en hover */
     color: var(--dark-blue); /* Mantener color de texto en hover */
 }
+
+
+/* Botón de Registro con Pictogramas */
+.pictogramas-button {
+    display: flex;
+    flex-direction: column; /* Coloca la imagen debajo del texto */
+    align-items: center;
+    padding: 20px;
+    background-color: var(--dark-blue); /* Fondo azul oscuro */
+    color: white; /* Texto en blanco */
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    position: absolute;
+    top: 20px; /* Ajustado a la parte superior */
+    left: 20px; /* Ajustado a la izquierda */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pictogramas-button:hover {
+    background-color: var(--soft-blue); /* Fondo cambia a azul claro */
+    color: var(--dark-blue); /* Texto cambia a azul oscuro */
+}
+
+.pictogramas-button-register {
+    background-color: var(--orange) !important;
+}
+
+.pictogramas-button-register:hover {
+    background-color: var(--soft-orange) !important; /* Fondo cambia a naranja claro */
+    color: var(--orange) !important; /* Texto cambia a naranja */
+}
+
+.button-image {
+    max-width: 80px; /* Tamaño más grande de la imagen */
+    margin-top: 10px; /* Espacio entre texto y imagen */
+}
+
+
+
+
 
