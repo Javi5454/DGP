@@ -12,12 +12,9 @@
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body class="body-centered">
-    <div class="welcome-container">
+    <div class="welcome-container static-container">
         <!-- Logo de la aplicación -->
         <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
-
-        <!-- Título de la página de inicio de sesión -->
-        <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
         <!-- Formulario de inicio de sesión -->
         <form method="post" action="{% url 'login' %}">
@@ -37,7 +34,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <button type="submit" class="btn btn-login-admin btn-block mt-3">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-login-admin btn-block mt-3">INICIAR SESIÓN</button>
         </form>
     </div>
 </body>

@@ -5,45 +5,59 @@
     --lighter-blue: #e0fbfc;
     --orange: #ee6c4d;
     --navy: #293241;
+    --soft-orange: #f7b683;
+    --soft-blue: #9bd0c8;
 }
 
 /* Fondo de la página */
 body {
-    background-color: var(--dark-blue);
+    background-color: var(--soft-orange);
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
     color: var(--navy);
     font-family: Arial, sans-serif;
 }
 
-/* Para nuestras páginas no dashboard*/
+/* Centrado de contenido */
 .body-centered {
     justify-content: center;
     align-items: center;
 }
 
-/* Contenedor de bienvenida */
-.welcome-container, .admin-container {
+/* Contenedor de bienvenida como botón */
+.welcome-container {
     text-align: center;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: var(--light-blue);
-    max-width: 300px;
-    margin: 10px;
-}
-
-/* Contenedor de inicio de sesión administrador */
-.admin-container {
-    background-color: var(--orange);
-}
-
-/* Título principal */
-.welcome-title {
-    font-size: 1.5em;
-    font-weight: bold;
+    background-color: var(--soft-blue);
+    max-width: 600px;
+    margin: 20px;
+    font-size: 1.2em;
     color: var(--dark-blue);
-    margin-bottom: 20px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.welcome-container:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
+}
+
+/* Desactivar hover para la caja en login.html */
+.static-container {
+    max-width: 800px; /* Aumenta el ancho máximo */
+    padding: 60px; /* Aumenta el relleno */
+}
+
+.static-container:hover {
+    background-color: var(--soft-blue); /* Color de fondo original sin cambio */
+    color: var(--dark-blue); /* Color de texto original */
 }
 
 /* Logo */
@@ -52,30 +66,38 @@ body {
     margin-bottom: 20px;
 }
 
-/* Botón de inicio de sesión alumno */
-.btn-login-alumno {
-    background-color: var(--lighter-blue);
-    color: var(--dark-blue);
-    border: none;
-    display: block;
-    width: 100%;
+/* Título */
+.welcome-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: inherit; /* Inherit color for hover effect */
+    margin-bottom: 20px;
 }
 
-.btn-login-alumno:hover {
-    background-color: var(--dark-blue);
-    color: #fff;
+/* Estilo para el título principal */
+.main-title {
+    color: white; /* Texto en blanco */
+    text-align: center; /* Centrado horizontal */
+    margin-top: 40px; /* Espacio desde el borde superior */
+    font-size: 4em; /* Tamaño de fuente aumentado */
+    font-weight: bold; /* Texto en negrita */
+    width: 100%; /* Anchura completa */
+    position: absolute; /* Posición fija en la parte superior */
+    top: 20px; /* Colocación un poco más abajo desde la parte superior */
+    left: 50%; /* Centro horizontal relativo */
+    transform: translateX(-50%); /* Ajuste para centrar */
 }
 
-/* Botón de inicio de sesión administrador */
+/* Estilo para el botón "Iniciar Sesión" */
 .btn-login-admin {
-    background-color: #ffffff;
-    color: var(--orange);
-    border: none;
-    display: block;
-    width: 100%;
+    border: 2px solid var(--dark-blue); /* Borde azul marino */
+    background-color: var(--dark-blue); /* Fondo azul marino */
+    color: white; /* Texto en blanco */
+    font-weight: bold;
+    transition: all 0.3s; /* Transición para el cambio de color */
 }
 
 .btn-login-admin:hover {
-    background-color: var(--dark-blue);
-    color: #fff;
+    background-color: white; /* Fondo blanco al hacer hover */
+    color: var(--dark-blue); /* Texto azul marino en hover */
 }
