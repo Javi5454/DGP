@@ -170,4 +170,4 @@ media/
 #Migrations
 migrations/
 
-!.gitignore
+.gitignore
