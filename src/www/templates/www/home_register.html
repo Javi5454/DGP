@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - CBP</title>
+    <!-- Bootstrap CSS -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <!-- Archivo CSS personalizado -->
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+
+<body class="body-centered body-centered-register">
+    <!-- Título principal para la selección de registro -->
+    <h1 class="main-title">REGISTRO</h1>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center flex-row-reverse">
+            <!-- Contenedor para el registro adaptado (izquierda) -->
+            <a href="{% url 'register_adapted' %}" class="welcome-container welcome-container-register col-sm-6">
+                <h2 class="welcome-title">REGISTRO CON PICTOGRAMAS</h2>
+                <div class="text-center">
+                    <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de registro adaptado" class="logo logo-large mx-auto d-block">
+                </div>
+            </a>
+
+            <!-- Contenedor para el registro clásico (derecha) -->
+            <a href="{% url 'register' %}" class="welcome-container welcome-container-register col-sm-6">
+                <h2 class="welcome-title">REGISTRO ALFANUMÉRICO</h2>
+                <div class="text-center">
+                    <img src="{% static 'images/register_alfanum.png' %}" alt="Logo de registro clásico" class="logo logo-large mx-auto d-block">
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

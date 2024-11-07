@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login con Pictogramas</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login_pictogram.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo" class="logo"> <!-- Añade tu logo aquí -->
+            <h1>Iniciar Sesión</h1>
+
+            <!-- Selección de usuario -->
+            <h2>Seleccione su usuario</h2>
+            <div class="person-grid">
+                {% for person in persons %}
+                    <div class="person-card" onclick="selectPerson('{{ person.user.username }}')">
+                        <img src="{{ person.picture.url }}" alt="Imagen de usuario">
+                        <p>{{ person.user.first_name }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Cuadrícula de pictogramas -->
+            <form method="post" action="{% url 'pictogram_login' %}" id="pictogram-form" style="display: none;">
+                {% csrf_token %}
+                <input type="hidden" name="person_id" id="person-id">
+                <h2>Seleccione la secuencia de pictogramas</h2>
+                
+                <!-- Cuadrícula de pictogramas -->
+                <div class="pictogram-grid">
+                    {% for pictogram in pictograms %}
+                        <div class="pictogram-card" onclick="selectPictogram('{{ pictogram.id }}', '{{ pictogram.image.url }}')">
+                            <img src="{{ pictogram.image.url }}" alt="{{ pictogram.description }}">
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <hr>
+
+                <!-- Indicadores de secuencia seleccionada -->
+                <div class="sequence-indicator">
+                    <div class="sequence-box" id="sequence-box-1"></div>
+                    <div class="sequence-box" id="sequence-box-2"></div>
+                    <button type="button" class="btn btn-danger clear-button" onclick="clearSelection()">
+                        🗑️
+                    </button>
+                </div>
+
+                <!-- Contenedor de mensaje de error -->
+                <div id="error-message" class="error-message"></div>
+
+                <input type="hidden" name="pictogram_sequence[]" id="pictogram-sequence">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let selectedSequence = [];
+
+        function selectPerson(personId) {
+            document.getElementById('person-id').value = personId;
+            document.getElementById('pictogram-form').style.display = 'block';
+            selectedSequence = []; // Resetear la secuencia para el nuevo usuario
+            resetSequenceIndicators(); // Resetear los cuadros grises
+        }
+
+        function selectPictogram(pictogramId, pictogramUrl) {
+            if (selectedSequence.length < 2) { // Limitar la secuencia a dos pictogramas
+                selectedSequence.push(pictogramId);
+                updateSequenceIndicator(pictogramUrl);
+
+                // Cuando se seleccionen dos pictogramas, verificar la secuencia
+                if (selectedSequence.length === 2) {
+                    checkSequence();
+                }
+            }
+        }
+
+        function updateSequenceIndicator(pictogramUrl) {
+            const index = selectedSequence.length; // 1 para el primer pictograma, 2 para el segundo
+            const sequenceBox = document.getElementById(`sequence-box-${index}`);
+            sequenceBox.style.backgroundImage = `url(${pictogramUrl})`;
+            sequenceBox.style.backgroundSize = "cover";
+        }
+
+        function clearSelection() {
+            if (selectedSequence.length > 0) {
+                // Eliminar el último pictograma de la secuencia
+                selectedSequence.pop();
+
+                // Limpiar el último cuadro gris correspondiente
+                const index = selectedSequence.length + 1; // 2 si queda uno, 1 si queda ninguno
+                const sequenceBox = document.getElementById(`sequence-box-${index}`);
+                sequenceBox.style.backgroundImage = '';
+            }
+        }
+
+        function resetSequenceIndicators() {
+            // Resetear los cuadros a su color gris
+            document.getElementById('sequence-box-1').style.backgroundImage = '';
+            document.getElementById('sequence-box-2').style.backgroundImage = '';
+        }
+
+        function checkSequence() {
+            const personId = document.getElementById('person-id').value;
+            
+            fetch("{% url 'pictogram_login' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+                body: JSON.stringify({
+                    person_id: personId,
+                    pictogram_sequence: selectedSequence,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirigir automáticamente si la secuencia es correcta
+                    window.location.href = data.redirect_url;
+                } else {
+                    // Reiniciar la secuencia si es incorrecta
+                    selectedSequence = [];
+                    resetSequenceIndicators();
+                    showError("Secuencia incorrecta. Inténtelo de nuevo.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*%$_+#l09aa09)%p22x=$#rh_+jetak&4nnmank1!@1ym35azi'
+SECRET_KEY = 'django-insecure-7qhymi#wwzvb6q#4t8mmz3k)_)f6)jnjn00^54@=*-tvju(#fw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,9 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'www.apps.WwwConfig',
-    'logic.apps.LogicConfig',
-    'bootstrap5',
+    'polls.apps.PollsConfig'
 ]
 
 MIDDLEWARE = [
@@ -55,13 +52,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'CBP.urls'
 
-TEMPLATES_WWW_PATH = os.path.join(BASE_DIR, 'www/templates/www')
-TEMPLATES_LOGIC_PATH = os.path.join(BASE_DIR, 'logic/templates/logic')
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_LOGIC_PATH],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,13 +75,9 @@ WSGI_APPLICATION = 'CBP.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'classroom',
-        'USER': 'dev',
-        'PASSWORD': 'devel',
-        'HOST': 'localhost',
-        'PORT': '5432'
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -126,21 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'static/'
-
-# For Media manage
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Configuraciones de redirección
-LOGIN_REDIRECT_URL = 'dashboard'   # Después de iniciar sesión, el usuario va a 'dashboard'
-LOGOUT_REDIRECT_URL = 'welcome'    # Después de cerrar sesión, el usuario va a 'welcome'
-LOGIN_URL = 'login'                # Si el usuario no autenticado intenta entrar a una página protegida, es redirigido a 'login'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

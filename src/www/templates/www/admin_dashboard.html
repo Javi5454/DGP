@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador - CBP</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body class="body-centered">
+    <h1 class="text-center">Panel de Administración</h1>
+    <div class="container mt-5 text-center">
+        <a href="{% url 'home_register' %}" class="btn btn-primary mb-3">Registrar Nuevo Usuario</a>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary mb-3">Ver Dashboard General</a>
+    </div>
+</body>
+</html>
