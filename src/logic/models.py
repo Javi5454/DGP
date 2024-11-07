@@ -40,11 +40,6 @@ class PictogramSequence(models.Model):
     person = models.OneToOneField(Person, on_delete=models.CASCADE)
     sequence = models.ManyToManyField(Pictogram, through='PictogramOrder', related_name='sequences')
 
-    def clean(self):
-        # Validmos que la secuencia tiene exactamente dos pictogramas
-        if self.sequence.count() != 2:
-            raise ValidationError("La secuencia debe de contener exactamente dos pictogramas!")
-
     def __str__(self):
         return "Secuencia de pictogramas de {}".format(self.person.user.username)
     
