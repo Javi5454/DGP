@@ -25,7 +25,7 @@ def pictogram_login(request):
 
         if selected_sequence == list(map(str, correct_sequence)):
             login(request, person.user)
-            return JsonResponse({"success": True, "redirect_url": "/"})
+            return JsonResponse({"success": True, "redirect_url": "/dashboard"})
         else:
             return JsonResponse({"success": False})
         

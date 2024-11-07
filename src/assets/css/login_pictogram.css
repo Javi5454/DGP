@@ -1,7 +1,7 @@
 /* login_pictogram.css */
 
 body {
-    background-color: #3a5677; /* Color de fondo de la pantalla completa */
+    background-color: #3a5677;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,53 +17,59 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
+    padding: 20px; /* Añadimos padding para dar margen */
+    box-sizing: border-box;
 }
 
 .login-box {
-    background-color: #7a9ebc; /* Color de fondo del cuadro de login */
-    padding: 40px;
+    background-color: #7a9ebc;
+    padding: 20px; /* Reducimos el padding interno */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 600px; /* Aumentar el ancho del cuadro */
+    width: 100%;
+    max-width: 500px; /* Reducimos el ancho máximo */
+    max-height: 90vh; /* Limitar el alto máximo al 90% de la pantalla */
+    overflow-y: hidden; /* Ocultamos el desplazamiento */
     text-align: center;
+    box-sizing: border-box;
 }
 
 .logo {
-    width: 120px; /* Tamaño del logo */
-    margin-bottom: 20px;
+    width: 100px; /* Reducimos el tamaño del logo */
+    margin-bottom: 15px;
 }
 
 h1 {
-    font-size: 26px;
-    margin-bottom: 10px;
+    font-size: 22px; /* Reducimos el tamaño de la fuente */
+    margin-bottom: 8px;
     color: #ffffff;
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 18px; /* Reducimos el tamaño de la fuente */
     color: #ffffff;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 8px;
 }
 
 .person-grid, .pictogram-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas para que entren más usuarios por fila */
-    gap: 20px;
-    margin-top: 15px;
-    margin-bottom: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; /* Reducimos el espacio entre tarjetas */
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .person-card, .pictogram-card {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 10px; /* Reducimos el padding interno */
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 160px; /* Tamaño de las tarjetas */
-    height: 180px;
+    width: 120px; /* Reducimos el tamaño de las tarjetas */
+    height: 140px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,46 +78,33 @@ h2 {
 
 .person-card img, .pictogram-card img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 10px; /* Espacio entre la imagen y el nombre */
-}
-
-.person-card p, .pictogram-card p {
-    font-size: 16px;
-    font-weight: bold;
-    color: #3a5677; /* Color oscuro para el texto */
-    margin: 0;
-    text-align: center;
-}
-
-.person-card:hover, .pictogram-card:hover {
-    transform: scale(1.05);
 }
 
 .sequence-indicator {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 8px; /* Reducimos el espacio entre cuadros */
+    margin-top: 15px;
     justify-content: center;
 }
 
 .sequence-box {
-    width: 50px;
-    height: 50px;
-    background-color: #cccccc; /* Color gris para los cuadros */
+    width: 40px; /* Reducimos el tamaño del cuadro */
+    height: 40px;
+    background-color: #cccccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .clear-button {
-    background-color: #ff4d4d; /* Rojo para el botón de papelera */
+    background-color: #ff4d4d;
     border: none;
     color: white;
-    font-size: 18px;
-    padding: 10px;
+    font-size: 14px; /* Reducimos el tamaño de fuente */
+    padding: 8px;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
@@ -120,21 +113,21 @@ h2 {
 }
 
 .clear-button:hover {
-    background-color: #ff3333; /* Color más oscuro al pasar el cursor */
+    background-color: #ff3333;
 }
 
 .error-message {
     display: none;
-    font-size: 20px;
+    font-size: 18px; /* Reducimos el tamaño de fuente */
     font-weight: bold;
     color: white;
-    background-color: #ff4d4d; /* Fondo rojo para el mensaje */
-    padding: 15px 20px;
+    background-color: #ff4d4d;
+    padding: 10px 15px; /* Reducimos el padding */
     border-radius: 8px;
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     width: 100%;
-    max-width: 500px; /* Limitar el ancho máximo */
-    margin: 20px auto 0; /* Centrar el mensaje */
+    max-width: 400px; /* Reducimos el ancho máximo */
+    margin: 15px auto 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
