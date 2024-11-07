@@ -181,7 +181,7 @@ body {
 }
 
 .button-image {
-    max-width: 80px; /* Tamaño más grande de la imagen */
+    max-width: 300px; /* Tamaño más grande de la imagen */
     margin-top: 10px; /* Espacio entre texto y imagen */
 }
 

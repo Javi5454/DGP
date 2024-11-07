@@ -1,7 +1,18 @@
 /* login_pictogram.css */
 
+/* Paleta de colores */
+:root {
+    --dark-blue: #3d5a80;
+    --light-blue: #98c1d9;
+    --lighter-blue: #e0fbfc;
+    --orange: #de4f2b;
+    --navy: #293241;
+    --soft-orange: #f7b683;
+    --soft-blue: #9bd0c8;
+}
+
 body {
-    background-color: #3a5677;
+    background-color: var(--soft-orange); /* Color de fondo de la pantalla completa */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,8 +28,8 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
-    padding: 20px; /* Añadimos padding para dar margen */
-    box-sizing: border-box;
+    padding: 20px;
+    color: var(--dark-blue);
 }
 
 .login-box {
@@ -32,6 +43,7 @@ body {
     overflow-y: hidden; /* Ocultamos el desplazamiento */
     text-align: center;
     box-sizing: border-box;
+    color: var(--dark-blue) !important;
 }
 
 .logo {
@@ -40,16 +52,14 @@ body {
 }
 
 h1 {
-    font-size: 22px; /* Reducimos el tamaño de la fuente */
-    margin-bottom: 8px;
-    color: #ffffff;
+    font-size: 26px;
+    margin-bottom: 10px;
 }
 
 h2 {
-    font-size: 18px; /* Reducimos el tamaño de la fuente */
-    color: #ffffff;
-    margin-top: 15px;
-    margin-bottom: 8px;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .person-grid, .pictogram-grid {
@@ -130,4 +140,31 @@ h2 {
     max-width: 400px; /* Reducimos el ancho máximo */
     margin: 15px auto 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de Registro Alfanumérico */
+.alfanum-button {
+    display: flex;
+    flex-direction: column; /* Coloca la imagen debajo del texto */
+    align-items: center;
+    padding: 20px;
+    background-color: var(--dark-blue); /* Fondo azul oscuro */
+    color: white; /* Texto en blanco */
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    position: absolute;
+    top: 20px; /* Ajustado a la parte superior */
+    left: 20px; /* Ajustado a la izquierda */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.alfanum-button:hover {
+    background-color: var(--soft-blue); /* Fondo cambia a azul claro */
+    color: var(--dark-blue); /* Texto cambia a azul oscuro */
+}
+
+.button-image {
+    max-width: 300px; /* Tamaño más grande de la imagen */
+    margin-top: 10px; /* Espacio entre texto y imagen */
 }

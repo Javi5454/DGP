@@ -11,13 +11,20 @@
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body>
-    <div class="login-container">
+
+    <!-- Botón Login Alfanumérico con imagen debajo del texto -->
+    <a href="{% url 'login' %}" class="alfanum-button">
+        <span>ALFANUMÉRICO</span>
+        <img src="{% static 'images/login_alfanum.png' %}" alt="Logo de la app" class="button-image">
+    </a>
+
+    <div class="login-container ">
         <div class="login-box">
             <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo" class="logo"> <!-- Añade tu logo aquí -->
-            <h1>Iniciar Sesión</h1>
+            <h1><strong>INICIAR SESIÓN</strong></h1>
 
             <!-- Selección de usuario -->
-            <h2>Seleccione su usuario</h2>
+            <h2>SELECCIONAR USUARIO</h2>
             <div class="person-grid">
                 {% for person in persons %}
                     <div class="person-card" onclick="selectPerson('{{ person.user.username }}')">
@@ -31,7 +38,7 @@
             <form method="post" action="{% url 'pictogram_login' %}" id="pictogram-form" style="display: none;">
                 {% csrf_token %}
                 <input type="hidden" name="person_id" id="person-id">
-                <h2>Seleccione la secuencia de pictogramas</h2>
+                <h2>SELECCIONAR PICTOGRAMAS</h2>
                 
                 <!-- Cuadrícula de pictogramas -->
                 <div class="pictogram-grid">
