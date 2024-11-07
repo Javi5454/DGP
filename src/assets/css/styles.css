@@ -134,6 +134,7 @@ body {
 .btn-register {
     border: 2px solid var(--orange) !important; /* Borde naranja */
     background-color: var(--orange) !important; /* Fondo naranja */
+    color: var(white) !important;
 }
 
 .btn-register:hover {
@@ -182,6 +183,20 @@ body {
 .button-image {
     max-width: 80px; /* Tamaño más grande de la imagen */
     margin-top: 10px; /* Espacio entre texto y imagen */
+}
+
+/* Estilo adicional para el botón en el panel de administración */
+.btn-secondary {
+    background-color: var(--soft-blue); /* Usa el color de tu elección */
+    border: 2px solid var(--dark-blue);
+    color: var(--dark-blue);
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
 }
 
 
