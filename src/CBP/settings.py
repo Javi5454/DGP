@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'www.apps.WwwConfig',
     'logic.apps.LogicConfig',
-    'adapted_identification.apps.AdaptedIdentificationConfig',
+    'pictograms.apps.PictogramsConfig',
     'bootstrap5',
 ]
 
@@ -57,12 +57,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'CBP.urls'
 
 TEMPLATES_WWW_PATH = os.path.join(BASE_DIR, 'www/templates/www')
-TEMPLATES_ADAPTED_IDENTIFICATION_PATH = os.path.join(BASE_DIR, 'adapted_identification/templates/adapted_identification')
+TEMPLATES_PICTOGRAM_PATH = os.path.join(BASE_DIR, 'pictograms/templates/pictograms')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_ADAPTED_IDENTIFICATION_PATH],
+        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_PICTOGRAM_PATH],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
