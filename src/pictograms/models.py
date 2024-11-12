@@ -27,7 +27,7 @@ class PictogramOrder(models.Model):
         unique_together = (('pictogram_sequence', 'pictogram', 'order'))
 
     def __str__(self):
-        return "{} - {}".format(self.pictogram_sequence.person.user.username, self.order)
+        return "{}, {} - {}".format(self.pictogram_sequence.person.user.last_name, self.pictogram_sequence.person.user.first_name, self.order)
     
     def clean(self):
         # validamos si el orden es 1 o 2 
