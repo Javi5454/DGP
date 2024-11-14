@@ -41,8 +41,14 @@ INSTALLED_APPS = [
     'www.apps.WwwConfig',
     'logic.apps.LogicConfig',
     'pictograms.apps.PictogramsConfig',
+    'tasks.apps.TasksConfig',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'bootstrap5',
 ]
+
+# Configuración de django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,11 +64,12 @@ ROOT_URLCONF = 'CBP.urls'
 
 TEMPLATES_WWW_PATH = os.path.join(BASE_DIR, 'www/templates/www')
 TEMPLATES_PICTOGRAM_PATH = os.path.join(BASE_DIR, 'pictograms/templates/pictograms')
+TEMPLATES_TASKS_PATH = os.path.join(BASE_DIR, 'tasks/templates/tasks')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_PICTOGRAM_PATH],
+        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_PICTOGRAM_PATH, TEMPLATES_TASKS_PATH],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

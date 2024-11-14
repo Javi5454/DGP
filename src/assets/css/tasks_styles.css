@@ -1,0 +1,43 @@
+/* custom_styles.css */
+
+/* Paleta de colores */
+:root {
+    --dark-blue: #3d5a80;
+    --light-blue: #98c1d9;
+    --lighter-blue: #e0fbfc;
+    --orange: #de4f2b;
+    --navy: #293241;
+    --soft-orange: #f7b683;
+    --soft-blue: #9bd0c8;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--soft-orange);
+    color: var(--navy);
+}
+
+.custom-card {
+    background-color: var(--soft-blue);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+button.custom-btn {
+    background-color: var(--dark-blue);
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+button.custom-btn:hover {
+    background-color: var(--navy);
+}
+
+.form-select img {
+    margin-right: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
