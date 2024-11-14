@@ -6,10 +6,12 @@ beautifulsoup4==4.12.3
 bleach==6.2.0
 certifi==2024.8.30
 charset-normalizer==3.4.0
+crispy-bootstrap5==2024.10
 decorator==5.1.1
 defusedxml==0.7.1
 Django==4.2.16
 django-bootstrap-v5==1.0.11
+django-crispy-forms==2.3
 docopt==0.6.2
 executing==2.1.0
 fastjsonschema==2.20.0
