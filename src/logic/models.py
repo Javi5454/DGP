@@ -15,15 +15,22 @@ def person_picture_upload_path(instance, original_filename):
 
 # Create your models here.
 class Person(models.Model):
+    ROLE_CHOICES = [
+        ('student', 'Alumno'),
+        ('teacher', 'Profesor'),
+        ('admin', 'Administrador')
+    ]
+
     user = models.OneToOneField(
         User,
         primary_key=True,
         on_delete=models.CASCADE
     )
     picture = models.ImageField(upload_to=person_picture_upload_path)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='student')
 
     class Meta:
         ordering = ['user__last_name', 'user__first_name']
 
     def __str__(self):
-        return "{}, {}".format(self.user.last_name, self.user.first_name)
+        return "{}, {} - {}".format(self.user.last_name, self.user.first_name, self.get_role_display())

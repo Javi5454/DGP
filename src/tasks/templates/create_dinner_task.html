@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Tarea de Cena</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+</head>
+
+<body style="background-color: var(--soft-orange);">
+    {% load crispy_forms_tags %}
+
+    <!-- Contenedor principal -->
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg custom-card" style="width: 60%;"> <!-- Cambiamos el ancho de la tarjeta -->
+            <div class="card-body text-center">
+                <h1 class="mb-4" style="color: var(--dark-blue);">Crear Tarea de Cena</h1>
+
+                <!-- Formulario de creación de tarea -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.student|as_crispy_field }} <!-- Campo alumno sin etiqueta duplicada -->
+                    </div>
+                    <div class="mb-3">
+                        {{ form.name|as_crispy_field }} <!-- Campo nombre sin etiqueta duplicada -->
+                    </div>
+                    <div class="mb-3">
+                        {{ form.deadline|as_crispy_field }} <!-- Campo fecha límite sin etiqueta duplicada -->
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 custom-btn">
+                        Asignar Tarea
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>
+
+</html>

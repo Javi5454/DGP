@@ -9,19 +9,18 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     {% load static %}
-    <link href="{% static '/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static '/css/dashboard_styles.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 
 <body>
     <!-- Contenedor del saludo -->
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 content-container">
         <div class="row">
             <div class="col-sm-12 mb-3">
                 <div class="welcome-background">
                     <h2 class="welcome-message px-3">Bienvenido, {{ request.user.get_full_name }}</h2>
                 </div>
-
             </div>
         </div>
         <div class="row">
@@ -29,11 +28,18 @@
         </div>
     </div>
 
-    <!-- Navbar fija en la parte inferior con colores personalizados -->
+    <!-- Navbar fija en la parte inferior con icono en el centro y foto de usuario a la derecha -->
     <nav class="navbar fixed-bottom custom-navbar">
-        <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center align-items-center">
             <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo" class="navbar-logo">
-            <a href="{% url 'logout' %}" class="ms-3 btn custom-logout-btn ml-3">Logout</a>
+            
+            <!-- Contenedor para la foto del usuario y el botón de logout -->
+            <div class="logout-container">
+                {% if request.user.person.picture %}
+                    <img src="{{ request.user.person.picture.url }}" alt="Foto del usuario" class="user-photo">
+                {% endif %}
+                <a href="{% url 'logout' %}" class="btn custom-logout-btn">Logout</a>
+            </div>
         </div>
     </nav>
 </body>
