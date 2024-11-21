@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Menú</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/menu_styles.css' %}">
+</head>
+
+<body style="background-color: var(--soft-blue);">
+    {% load crispy_forms_tags %}
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg custom-card" style="width: 60%;">
+            <div class="card-body">
+                <h1 class="text-center mb-4" style="color: var(--orange);">Editar Menú</h1>
+
+                <!-- Formulario para editar menú -->
+                <form method="post" enctype="multipart/form-data" action="{% url 'manage_menus' %}">
+                    {% csrf_token %}
+                    <!-- Mostrar imagen actual -->
+                    <div class="mb-3 text-center">
+                        <label>Imagen Actual:</label>
+                        <br>
+                        <img src="{{ menu.image.url }}" alt="Imagen del menú" style="width: 200px; height: auto; margin-top: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+
+                    <!-- Editar texto asociado -->
+                    <div class="mb-3">
+                        <label for="description">Nombre del Menú:</label>
+                        <input type="text" id="description" name="description" value="{{ menu.description }}" class="form-control">
+                    </div>
+
+                    <!-- Editar imagen -->
+                    <div class="mb-3">
+                        <label for="image">Selecciona una nueva imagen (opcional):</label>
+                        <input type="file" id="image" name="image" accept="image/*" class="form-control">
+                    </div>
+
+                    <!-- Botón de guardar -->
+                    <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+                </form>
+
+                <!-- Botón para volver -->
+                <a href="{% url 'manage_menus' %}" class="btn btn-secondary w-100 mt-3">Volver</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

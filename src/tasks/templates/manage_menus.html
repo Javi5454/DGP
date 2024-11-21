@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Menús</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+</head>
+
+<body style="background-color: var(--soft-blue);">
+    {% load crispy_forms_tags %}
+
+    <!-- Contenedor principal -->
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg custom-card" style="width: 70%;"> <!-- Ajustar ancho para mejor visibilidad -->
+            <div class="card-body">
+                <h1 class="mb-4 text-center" style="color: var(--orange);">Gestionar Menús</h1>
+
+                
+                <!-- Formulario para añadir o editar menú -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3" style="color: white; font-weight: bold;">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="image" style="color: white; font-weight: bold; margin-bottom: 8px; display: inline-block;">Selecciona una imagen*:</label>
+                        <input type="file" id="image" name="image" accept="image/*" class="form-control">
+                    </div>
+                
+                    <button type="submit" class="btn custom-btn w-100 mt-3">Guardar Menú</button>
+                </form>
+
+                <!-- Tabla de menús existentes -->
+                <h2 class="mt-5 mb-3 text-center" style="color: var(--orange);">Menús Existentes</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle" style="color: white;">Nombre</th>
+                            <th class="text-center align-middle" style="color: white;">Pictograma</th>
+                            <th class="text-center align-middle" style="color: white;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for menu in menus %}
+                        <tr>
+                            <!-- Muestra el nombre del menú centrado -->
+                            <td class="text-center align-middle" style="color: white;">{{ menu.description }}</td> 
+                            <!-- Muestra la imagen -->
+                            <td class="text-center align-middle">
+                                <img src="{{ menu.image.url }}" alt="Pictograma de {{ menu.description }}" 
+                                     style="width: 100px; height: auto;">
+                            </td> 
+                            <!-- Muestra los botones centrados -->
+                            <td class="text-center align-middle">
+                                <a href="{% url 'edit_menu' menu.id %}" class="btn custom-btn2 btn-sm ">Editar</a>
+                                <a href="{% url 'delete_menu' menu.id %}" class="btn btn-danger btn-sm" 
+                                   onclick="return confirm('¿Estás seguro de eliminar este menú?');">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -6,25 +6,25 @@
     --light-blue: #98c1d9;
     --lighter-blue: #e0fbfc;
     --orange: #de4f2b;
-    --navy: #293241;
+    --navy: #324b74;
     --soft-orange: #f7b683;
     --soft-blue: #9bd0c8;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--soft-orange);
-    color: var(--navy);
+    background-color: var(--soft-blue);
+    color: var(--orange);
 }
 
 .custom-card {
-    background-color: var(--soft-blue);
+    background-color: var(--soft-orange);
     padding: 20px;
     border-radius: 15px;
 }
 
-button.custom-btn {
-    background-color: var(--dark-blue);
+.btn.custom-btn {
+    background-color: var(--orange);
     color: white;
     border: none;
     font-weight: bold;
@@ -32,8 +32,24 @@ button.custom-btn {
     transition: background-color 0.3s ease;
 }
 
-button.custom-btn:hover {
+.btn.custom-btn:hover {
+    background-color: white;
+    color: var(--orange);
+    border-color: var(--orange);
+}
+
+
+
+.btn.custom-btn2 {
+    background-color: var(--dark-blue);
+    color: white;
+    border-color: var(--dark-blue);
+}
+
+.btn.custom-btn2:hover {
     background-color: var(--navy);
+    color: white;
+    border-color: var(--navy);
 }
 
 .form-select img {
