@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario - Paso 2</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+        .pictogram-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .pictogram-card {
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            width: 60px;
+            height: 60px;
+            transition: border-color 0.3s;
+            overflow: hidden;
+            /* Para asegurar que la imagen no desborde */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pictogram-card img {
+            width: 100%;
+            /* La imagen ocupa todo el ancho */
+            height: 100%;
+            /* La imagen ocupa todo el alto */
+            object-fit: cover;
+            /* Ajusta la imagen sin distorsionarla */
+            border-radius: 5px;
+            /* Mantiene la esquina redondeada de la imagen */
+        }
+
+        .pictogram-card.selected {
+            border-color: var(--dark-blue);
+        }
+
+        .sequence-indicator {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .sequence-box {
+            width: 50px;
+            height: 50px;
+            border: 2px dashed #ccc;
+            margin-right: 10px;
+            overflow: hidden;
+            /* Para que la imagen no se salga del contenedor */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sequence-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body class="body-centered">
+    <div class="register-container">
+        <div class="register-box" style="background-color: var(--soft-blue);">
+            <h1 class="text-center"><strong>REGISTRO DE USUARIO</strong></h1>
+            <p class="text-center">Paso 2: Establece la contraseña con pictogramas</p>
+
+            <!-- Mostrar mensajes de éxito -->
+            {% if messages %}
+            <div class="alert alert-success mt-2">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'register_pictogram2' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <!-- Selección de Pictogramas para Contraseña -->
+                <div class="pictogram-grid">
+                    {% for pictogram in pictograms %}
+                    <div class="pictogram-card"
+                        onclick="selectPictogram('{{ pictogram.id }}', '{{ pictogram.image.url }}')">
+                        <img src="{{ pictogram.image.url }}" alt="{{ pictogram.description }}">
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="sequence-indicator">
+                    <div class="sequence-box" id="sequence-box-1"></div>
+                    <div class="sequence-box" id="sequence-box-2"></div>
+                    <button type="button" class="btn btn-danger clear-button" onclick="clearSelection()">🗑️ Limpiar
+                        selección</button>
+                </div>
+
+                <input type="hidden" name="pictogram_sequence" id="pictogram_sequence">
+                <button type="submit" class="btn btn-login-admin btn-block mt-3">Confirmar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script de selección de pictogramas -->
+    <script>
+        let selectedSequence = [];
+
+        function selectPictogram(pictogramId, pictogramUrl) {
+            if (selectedSequence.length < 2) {
+                selectedSequence.push(pictogramId);
+                document.getElementById(`sequence-box-${selectedSequence.length}`).innerHTML = `<img src="${pictogramUrl}" alt="Pictograma seleccionado">`;
+                document.getElementById("pictogram_sequence").value = selectedSequence;
+                console.log(document.getElementById("pictogram_sequence").value)
+            }
+        }
+
+        function clearSelection() {
+            selectedSequence = [];
+            document.getElementById('sequence-box-1').innerHTML = '';
+            document.getElementById('sequence-box-2').innerHTML = '';
+            document.getElementById("pictogram-sequence").value = '';
+        }
+    </script>
+</body>
+
+</html>
