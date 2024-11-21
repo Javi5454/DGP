@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario - Paso 1</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+
+<body class="body-centered">
+    <div class="register-container">
+        <div class="register-box" style="background-color: var(--soft-blue);">
+            <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo" class="logo mx-auto d-block mb-4" style="width: 80px;">
+            <h1 class="text-center"><strong>REGISTRO DE USUARIO</strong></h1>
+            <p class="text-center">Paso 1: Introduce los datos personales</p>
+
+            <!-- Formulario de Datos Personales -->
+            <form method="post" action="{% url 'register_pictogram1' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <!-- Botón para pasar al siguiente paso -->
+                <button type="submit" class="btn btn-login-admin btn-block mt-3">Establecer Contraseña</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

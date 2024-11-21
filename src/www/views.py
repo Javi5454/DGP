@@ -64,33 +64,10 @@ def register(request):
 
         user = User.objects.create_user(username=username, password=password)
         user.save()
-        messages.success(request, "Registro exitoso. Ahora puedes iniciar sesión.")
-        return redirect('login')
+        messages.success(request, "Usuario registrado exitosamente.")
+        return redirect('admin_dashboard')
 
     return render(request, 'register.html')
-
-# Vista de registro adaptado, solo accesible para administradores
-@user_passes_test(is_admin)
-def register_adapted(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        password_confirmation = request.POST['password_confirmation']
-
-        if password != password_confirmation:
-            messages.error(request, "Las contraseñas no coinciden.")
-            return redirect('register_adapted')
-
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "El nombre de usuario ya está en uso.")
-            return redirect('register_adapted')
-
-        user = User.objects.create_user(username=username, password=password)
-        user.save()
-        messages.success(request, "Registro adaptado exitoso. Ahora puedes iniciar sesión.")
-        return redirect('login')
-
-    return render(request, 'register_adapted.html')
 
 # Para cerrar sesión
 def logout_view(request):
