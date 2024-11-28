@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from .forms import UserRegistrationForm
+from logic.models import Person
 
 # Función para verificar si el usuario es un administrador
 def is_admin(user):
@@ -50,25 +52,35 @@ def home_register(request):
 @user_passes_test(is_admin)
 def register(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        password_confirmation = request.POST['password_confirmation']
+        form = UserRegistrationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)  # Guardar los datos de usuario parcialmente
+            user.set_password(form.cleaned_data['password'])  # Establecer la contraseña encriptada
+            user.save()  # Guardar el usuario
 
-        if password != password_confirmation:
-            messages.error(request, "Las contraseñas no coinciden.")
-            return redirect('register')
+            # Verificar el rol seleccionado
+            role = form.cleaned_data['role']
+            if role == 'admin':
+                user.is_staff = True  # Permitir acceso al panel de administración
+                user.is_superuser = True  # Convertir en superusuario
+                user.save()  # Guardar cambios en el usuario
 
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "El nombre de usuario ya está en uso.")
-            return redirect('register')
+            # Crear el perfil de persona asociado al usuario
+            Person.objects.create(
+                user=user,
+                role=form.cleaned_data['role'],  # Tomar el rol del formulario
+                picture=form.cleaned_data['picture']  # Guardar la foto de perfil subida
+            )
 
-        user = User.objects.create_user(username=username, password=password)
-        user.save()
-        messages.success(request, "Usuario registrado exitosamente.")
-        return redirect('admin_dashboard')
+            # Mensaje de éxito y redirigir
+            messages.success(request, "Usuario registrado exitosamente.")
+            return redirect('admin_dashboard')  # Redirigir al dashboard de administración
+        else:
+            messages.error(request, "Hubo un error en el formulario. Por favor, revisa los datos.")
+    else:
+        form = UserRegistrationForm()  # Renderizar un formulario vacío para GET
 
-    return render(request, 'register.html')
-
+    return render(request, 'register.html', {'form': form})
 # Para cerrar sesión
 def logout_view(request):
     logout(request)
