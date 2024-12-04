@@ -38,7 +38,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 500px; /* Reducimos el ancho máximo */
+    max-width: 1200px; /* Reducimos el ancho máximo */
     max-height: 90vh; /* Limitar el alto máximo al 90% de la pantalla */
     overflow-y: hidden; /* Ocultamos el desplazamiento */
     text-align: center;
@@ -78,8 +78,8 @@ h2 {
     cursor: pointer;
     transition: transform 0.2s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 120px; /* Reducimos el tamaño de las tarjetas */
-    height: 140px;
+    width: 160px; /* Reducimos el tamaño de las tarjetas */
+    height: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
