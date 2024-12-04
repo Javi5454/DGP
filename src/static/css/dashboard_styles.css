@@ -1,19 +1,19 @@
 :root {
-    --dark-blue: #047cd7;
+    --dark-blue: #3d5a80;
     --light-blue: #98c1d9;
     --lighter-blue: #e0fbfc;
     --orange: #de4f2b;
     --navy: #131c81;
     --soft-orange: #f7b683;
     --soft-blue: #9bd0c8;
-    --my-blue: #51abdb;
+    --my-blue: #2b9dda;
     --white: #ffffff;
 }
 
 /* Fondo y colores generales */
 body {
     font-family: Arial, sans-serif;
-    color: var(--white);
+    color: var(--navy);
     background-color: var(--white);
     margin: 0;
     padding: 0;
@@ -22,7 +22,7 @@ body {
 /* Contenedor principal con fondo */
 .container-fluid {
     padding: 20px;
-    background-color: var(--my-blue); 
+    background-color: var(--my-blue); /* Fondo azul muy claro */
     border-radius: 10px;
 }
 
@@ -37,7 +37,7 @@ body {
 
 .container-fluid {
     padding: 20px;
-    background-color: var(--my-blue);
+    background-color: var(--lighter-blue);
     border-radius: 10px;
     margin-top: 180px;
 }
@@ -49,7 +49,7 @@ body {
 }
 
 .navbar.fixed-top {
-    background-color: var(--my-blue);
+    background-color: var(--soft-orange);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -84,13 +84,13 @@ body {
 
 /* Mensaje de bienvenida */
 .welcome-background {
-    background-color: var(--white); 
+    background-color: var(--white); /* Fondo azul suave */
     padding: 20px;
     border-radius: 8px;
 }
 
 .welcome-message {
-    color: var(--my-blue); 
+    color: var(--my-blue); /* Texto en tono navy oscuro */
     font-size: 24px;
     font-weight: bold;
 }
@@ -150,6 +150,20 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
+}
+
+.navbar-logo {
+    width: 50px;
+    height: auto;
+}
+
+.user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+    border: 2px solid var(--my-blue);
 }
 
 .logout-container {
