@@ -12,7 +12,7 @@
 }
 
 body {
-    background-color: var(--soft-orange); /* Color de fondo de la pantalla completa */
+    background-color: var(--soft-blue); /* Color de fondo de la pantalla completa */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,11 +29,11 @@ body {
     height: 100%;
     width: 100%;
     padding: 20px;
-    color: var(--dark-blue);
+    color: var(--orange);
 }
 
 .login-box {
-    background-color: var(--soft-blue);
+    background-color: var(--soft-orange);
     padding: 20px; /* Reducimos el padding interno */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -43,7 +43,7 @@ body {
     overflow-y: hidden; /* Ocultamos el desplazamiento */
     text-align: center;
     box-sizing: border-box;
-    color: var(--dark-blue) !important;
+    color: var(--orange) !important;
 }
 
 .logo {
@@ -148,7 +148,7 @@ h2 {
     flex-direction: column; /* Coloca la imagen debajo del texto */
     align-items: center;
     padding: 20px;
-    background-color: var(--dark-blue); /* Fondo azul oscuro */
+    background-color: var(--orange); /* Fondo azul oscuro */
     color: white; /* Texto en blanco */
     font-weight: bold;
     border-radius: 5px;
@@ -160,7 +160,7 @@ h2 {
 }
 
 .alfanum-button:hover {
-    background-color: var(--soft-blue); /* Fondo cambia a azul claro */
+    background-color: var(--soft-orange); /* Fondo cambia a azul claro */
     color: var(--dark-blue); /* Texto cambia a azul oscuro */
 }
 

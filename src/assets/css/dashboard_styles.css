@@ -3,16 +3,18 @@
     --light-blue: #98c1d9;
     --lighter-blue: #e0fbfc;
     --orange: #de4f2b;
-    --navy: #293241;
+    --navy: #131c81;
     --soft-orange: #f7b683;
     --soft-blue: #9bd0c8;
+    --my-blue: #2b9dda;
+    --white: #ffffff;
 }
 
 /* Fondo y colores generales */
 body {
     font-family: Arial, sans-serif;
     color: var(--navy);
-    background-color: var(--soft-orange); /* Fondo similar al tono anaranjado suave */
+    background-color: var(--white);
     margin: 0;
     padding: 0;
 }
@@ -20,25 +22,25 @@ body {
 /* Contenedor principal con fondo */
 .container-fluid {
     padding: 20px;
-    background-color: var(--lighter-blue); /* Fondo azul muy claro */
+    background-color: var(--my-blue); /* Fondo azul muy claro */
     border-radius: 10px;
 }
 
 .welcome-background {
-    background-color: var(--soft-blue); /* Fondo azul suave */
+    background-color: var(--white); /* Fondo azul suave */
     padding: 20px;
     border-radius: 8px;
 }
 
 .welcome-message {
-    color: var(--navy); /* Texto en tono navy oscuro */
+    color: var(--my-blue); /* Texto en tono navy oscuro */
     font-size: 24px;
     font-weight: bold;
 }
 
 /* Login Box */
 .login-box {
-    background-color: var(--lighter-blue); /* Fondo azul muy claro */
+    background-color: #ffffff; /* Fondo azul muy claro */
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -69,7 +71,7 @@ body {
     width: 100%;
     padding: 10px;
     font-size: 18px;
-    background-color: var(--dark-blue); /* Botón oscuro */
+    background-color: var(--navy); /* Botón oscuro */
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -79,11 +81,12 @@ body {
 
 .login-box button:hover {
     background-color: var(--navy); /* Color más oscuro al pasar el cursor */
+    color: #ffffff;
 }
 
 /* Navbar fija en la parte inferior */
 .navbar.fixed-bottom {
-    background-color: var(--soft-orange); /* Fondo anaranjado suave */
+    background-color: var(--my-blue); /* Fondo anaranjado suave */
     height: 70px;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -103,7 +106,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     margin-left: 10px;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--my-blue);
 }
 
 .logout-container {
@@ -124,12 +127,13 @@ body {
 
 .custom-logout-btn:hover {
     background-color: var(--navy);
+    color: #ffffff;
 }
 
 /* Estilo para los pictogramas */
 .pictogram-card {
     background-color: #ffffff;
-    border: 1px solid var(--light-blue);
+    border: 1px solid var(--my-blue);
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
