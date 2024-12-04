@@ -9,81 +9,173 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/login_pictogram.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style>
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .user-selection-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--soft-blue);
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 1000px; /* Ajusta el tamaño máximo del cuadro */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-selection-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .person-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Ajusta columnas automáticamente */
+            gap: 20px;
+            justify-items: center; /* Centra las imágenes dentro de las celdas */
+            width: 100%;
+        }
+
+        .person-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .person-card:hover {
+            transform: scale(1.05);
+        }
+
+        .person-card img {
+            width: 100px;
+            height: 100x;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .alfanum-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .alfanum-button img {
+            max-width: 200px;
+            margin-top: 10px;
+        }
+
+        .divider {
+            width: 2px;
+            background-color: var(--dark-blue);
+            height: 300px;
+            margin: 0 20px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Botón Login Alfanumérico con imagen debajo del texto -->
+    <!-- Botón Login Alfanumérico -->
     <a href="{% url 'login' %}" class="alfanum-button">
         <span>ALFANUMÉRICO</span>
-        <img src="{% static 'images/login_alfanum.png' %}" alt="Logo de la app" class="button-image">
+        <img src="{% static 'images/login_alfanum.png' %}" alt="Logo de la app">
     </a>
 
-    <div class="login-container ">
-        <div class="login-box">
-            <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo" class="logo"> <!-- Añade tu logo aquí -->
-            <h1><strong>INICIAR SESIÓN</strong></h1>
-
-            <!-- Selección de usuario -->
-            <h2>SELECCIONAR USUARIO</h2>
+    <div class="login-container">
+        <!-- Primera parte: Selección de usuario -->
+        <div class="user-selection-box" id="user-selection-box">
+            <h2 class="user-selection-title">Seleccionar Usuario</h2>
             <div class="person-grid">
                 {% for person in persons %}
-                    <div class="person-card" onclick="selectPerson('{{ person.user.username }}')">
+                    <div class="person-card" onclick="selectPerson('{{ person.user.username }}', '{{ person.picture.url }}', '{{ person.user.first_name }}')">
                         <img src="{{ person.picture.url }}" alt="Imagen de usuario">
                         <p>{{ person.user.first_name }}</p>
                     </div>
                 {% endfor %}
             </div>
+        </div>
 
-            <!-- Cuadrícula de pictogramas -->
-            <form method="post" action="{% url 'pictogram_login' %}" id="pictogram-form" style="display: none;">
-                {% csrf_token %}
-                <input type="hidden" name="person_id" id="person-id">
-                <h2>SELECCIONAR PICTOGRAMAS</h2>
-                
-                <!-- Cuadrícula de pictogramas -->
-                <div class="pictogram-grid">
-                    {% for pictogram in pictograms %}
-                        <div class="pictogram-card" onclick="selectPictogram('{{ pictogram.id }}', '{{ pictogram.image.url }}')">
-                            <img src="{{ pictogram.image.url }}" alt="{{ pictogram.description }}">
-                        </div>
-                    {% endfor %}
-                </div>
+        <!-- Segunda parte: Login con pictogramas -->
+        <div class="login-box" style="display: none;" id="login-box">
+            <div class="user-info" id="user-info">
+                <img src="" alt="Imagen de usuario" id="user-image">
+                <h3 id="user-name"></h3>
+            </div>
 
-                <hr>
+            <div class="divider"></div>
 
-                <!-- Indicadores de secuencia seleccionada -->
-                <div class="sequence-indicator">
-                    <div class="sequence-box" id="sequence-box-1"></div>
-                    <div class="sequence-box" id="sequence-box-2"></div>
-                    <button type="button" class="btn btn-danger clear-button" onclick="clearSelection()">
-                        🗑️
-                    </button>
-                </div>
-
-                <!-- Contenedor de mensaje de error -->
-                <div id="error-message" class="error-message"></div>
-
-                <input type="hidden" name="pictogram_sequence[]" id="pictogram-sequence">
-            </form>
+            <div class="pictogram-section" id="pictogram-section">
+                <h2>Seleccionar Pictogramas</h2>
+                <form method="post" id="pictogram-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="person_id" id="person-id">
+                    <div class="pictogram-grid">
+                        {% for pictogram in pictograms %}
+                            <div class="pictogram-card" onclick="selectPictogram('{{ pictogram.id }}', '{{ pictogram.image.url }}')">
+                                <img src="{{ pictogram.image.url }}" alt="{{ pictogram.description }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="sequence-indicator">
+                        <div class="sequence-box" id="sequence-box-1"></div>
+                        <div class="sequence-box" id="sequence-box-2"></div>
+                        <button type="button" class="btn btn-danger clear-button" onclick="clearSelection()">🗑️</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
         let selectedSequence = [];
 
-        function selectPerson(personId) {
+        function selectPerson(personId, userImageUrl, userName) {
             document.getElementById('person-id').value = personId;
-            document.getElementById('pictogram-form').style.display = 'block';
-            selectedSequence = []; // Resetear la secuencia para el nuevo usuario
-            resetSequenceIndicators(); // Resetear los cuadros grises
+            document.getElementById('user-image').src = userImageUrl;
+            document.getElementById('user-name').textContent = userName;
+
+            // Ocultar la primera sección y mostrar la segunda
+            document.getElementById('user-selection-box').style.display = 'none';
+            document.getElementById('login-box').style.display = 'flex';
+
+            // Resetear la secuencia seleccionada
+            selectedSequence = [];
+            resetSequenceIndicators();
         }
 
         function selectPictogram(pictogramId, pictogramUrl) {
-            if (selectedSequence.length < 2) { // Limitar la secuencia a dos pictogramas
+            if (selectedSequence.length < 2) {
                 selectedSequence.push(pictogramId);
                 updateSequenceIndicator(pictogramUrl);
 
-                // Cuando se seleccionen dos pictogramas, verificar la secuencia
                 if (selectedSequence.length === 2) {
                     checkSequence();
                 }
@@ -91,33 +183,25 @@
         }
 
         function updateSequenceIndicator(pictogramUrl) {
-            const index = selectedSequence.length; // 1 para el primer pictograma, 2 para el segundo
+            const index = selectedSequence.length;
             const sequenceBox = document.getElementById(`sequence-box-${index}`);
             sequenceBox.style.backgroundImage = `url(${pictogramUrl})`;
             sequenceBox.style.backgroundSize = "cover";
         }
 
         function clearSelection() {
-            if (selectedSequence.length > 0) {
-                // Eliminar el último pictograma de la secuencia
-                selectedSequence.pop();
-
-                // Limpiar el último cuadro gris correspondiente
-                const index = selectedSequence.length + 1; // 2 si queda uno, 1 si queda ninguno
-                const sequenceBox = document.getElementById(`sequence-box-${index}`);
-                sequenceBox.style.backgroundImage = '';
-            }
+            selectedSequence = [];
+            resetSequenceIndicators();
         }
 
         function resetSequenceIndicators() {
-            // Resetear los cuadros a su color gris
             document.getElementById('sequence-box-1').style.backgroundImage = '';
             document.getElementById('sequence-box-2').style.backgroundImage = '';
         }
 
         function checkSequence() {
             const personId = document.getElementById('person-id').value;
-            
+
             fetch("{% url 'pictogram_login' %}", {
                 method: "POST",
                 headers: {
@@ -132,10 +216,8 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Redirigir automáticamente si la secuencia es correcta
                     window.location.href = data.redirect_url;
                 } else {
-                    // Reiniciar la secuencia si es incorrecta
                     selectedSequence = [];
                     resetSequenceIndicators();
                     showError("Secuencia incorrecta. Inténtelo de nuevo.");
@@ -148,11 +230,7 @@
             const errorMessage = document.getElementById('error-message');
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
-
-            // Ocultar el mensaje después de 3 segundos
-            setTimeout(() => {
-                errorMessage.style.display = 'none';
-            }, 3000);
+            setTimeout(() => errorMessage.style.display = 'none', 3000);
         }
     </script>
 </body>

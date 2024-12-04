@@ -10,11 +10,28 @@
     {% bootstrap_javascript %}
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+        .preview-container {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 10px;
+            border: 2px solid var(--dark-blue);
+            object-fit: cover;
+            display: none; /* Oculta la imagen hasta que se cargue */
+        }
+    </style>
 </head>
 
 <body class="body-centered">
     <div class="register-container">
-        <div class="register-box" style="background-color: var(--soft-blue);">
+        <div class="register-box" style="background-color: var(--my-blue);">
             <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo" class="logo mx-auto d-block mb-4" style="width: 80px;">
             <h1 class="text-center"><strong>REGISTRO DE USUARIO</strong></h1>
             <p class="text-center">Paso 1: Introduce los datos personales</p>
@@ -24,11 +41,36 @@
                 {% csrf_token %}
                 {{ form.as_p }}
 
+                <!-- Contenedor de vista previa de la imagen -->
+                <div class="preview-container">
+                    <img id="image-preview" src="" alt="Vista previa" class="image-preview">
+                </div>
+
                 <!-- Botón para pasar al siguiente paso -->
                 <button type="submit" class="btn btn-login-admin btn-block mt-3">Establecer Contraseña</button>
             </form>
         </div>
     </div>
+
+    <script>
+        const profilePictureInput = document.getElementById("id_picture");
+        const imagePreview = document.getElementById("image-preview");
+
+        profilePictureInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Muestra la imagen
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+                imagePreview.style.display = "none"; // Oculta la imagen si no hay archivo
+            }
+        });
+    </script>
 </body>
 
 </html>

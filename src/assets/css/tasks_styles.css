@@ -2,29 +2,32 @@
 
 /* Paleta de colores */
 :root {
-    --dark-blue: #3d5a80;
+    --dark-blue: #047cd7;
     --light-blue: #98c1d9;
     --lighter-blue: #e0fbfc;
     --orange: #de4f2b;
-    --navy: #324b74;
+    --navy: #131c81;
     --soft-orange: #f7b683;
     --soft-blue: #9bd0c8;
+    --my-blue: #51abdb;
+    --white: #ffffff;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--soft-blue);
-    color: var(--orange);
+    background-color: var(--white);
+    color: var(--my-blue);
 }
 
 .custom-card {
-    background-color: var(--soft-orange);
+    background-color: var(--my-blue) !important;
     padding: 20px;
     border-radius: 15px;
+    color: white;
 }
 
 .btn.custom-btn {
-    background-color: var(--orange);
+    background-color: var(--dark-blue);
     color: white;
     border: none;
     font-weight: bold;
@@ -33,11 +36,10 @@ body {
 }
 
 .btn.custom-btn:hover {
-    background-color: white;
-    color: var(--orange);
-    border-color: var(--orange);
+    background-color: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
 }
-
 
 
 .btn.custom-btn2 {

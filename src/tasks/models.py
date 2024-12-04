@@ -22,12 +22,28 @@ class Menu(models.Model):
     image = models.ImageField(upload_to='pictogramas/', null=True, blank=True)  # Guardará las imágenes en la carpeta /media/pictogramas
 
     def save(self, *args, **kwargs):
-        # Verificar si el archivo ya existe
-        existing_image_path = os.path.join(settings.MEDIA_ROOT, self.image.name)
+    # Si el menú ya existe (es una edición) y tiene una imagen anterior
+        if self.pk:
+            try:
+                existing_menu = Menu.objects.get(pk=self.pk)
+                # Compara la imagen anterior con la nueva
+                if existing_menu.image and existing_menu.image != self.image:
+                    existing_image_path = existing_menu.image.path
+                    if os.path.isfile(existing_image_path):
+                        os.remove(existing_image_path)  # Elimina la imagen anterior
+            except Menu.DoesNotExist:
+                pass  # No existe un menú previo, no se hace nada
 
-        if os.path.exists(existing_image_path) and not self._state.adding:  # Solo verifica al editar
-            self.image.name = f'pictogramas/{self.image.name}'  # Reutiliza el archivo existente
-        super().save(*args, **kwargs)
+        # Llama al método save explícitamente con super() bien definido
+        super(Menu, self).save(*args, **kwargs)  # Guarda el nuevo menú
+
+    def delete(self, *args, **kwargs):
+        # Elimina la imagen asociada al menú cuando se elimina el registro
+        if self.image:
+            image_path = self.image.path
+            if os.path.isfile(image_path):
+                os.remove(image_path)
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return "Menú: {}".format(self.description)

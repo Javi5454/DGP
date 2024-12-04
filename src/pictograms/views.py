@@ -9,10 +9,12 @@ from .forms import PersonalDataForm, PictogramPasswordForm
 from django.core.files.storage import default_storage
 from django.core.files.base import File
 
+import random
 import json
 
 def is_admin(user):
     return user.is_staff
+
 
 def pictogram_login(request):
     if request.method == 'POST':
@@ -20,23 +22,32 @@ def pictogram_login(request):
         username = data.get('person_id')
         selected_sequence = data.get('pictogram_sequence', [])
 
+        # Obtener la persona asociada al usuario seleccionado
         person = get_object_or_404(Person, user__username=username)
+
+        # Obtener la secuencia de pictogramas correcta
         try:
             pictogram_sequence = PictogramSequence.objects.get(person=person)
         except PictogramSequence.DoesNotExist:
             return JsonResponse({"error": "Secuencia de pictogramas no encontrada para esta persona."}, status=400)
-        
+
         correct_sequence = [str(po.pictogram.id) for po in pictogram_sequence.pictogramorder_set.order_by('order')]
 
-        # Verificar si la secuencia ingresada es correcta
+        # Verificar si la secuencia seleccionada es correcta
         if selected_sequence == correct_sequence:
-            login(request, person.user)
-            return JsonResponse({"success": True, "redirect_url": "/dashboard"})
+            login(request, person.user)  # Iniciar sesión del usuario
+            return JsonResponse({"success": True, "redirect_url": "/dashboard"})  # Redirigir al dashboard
         else:
-            return JsonResponse({"success": False, "message": "Secuencia incorrecta"})
-        
+            return JsonResponse({"success": False, "message": "Secuencia incorrecta."})
+
+    # Obtener todos los usuarios con secuencia de pictogramas asociada
     persons = Person.objects.filter(pictogramsequence__isnull=False)
-    return render(request, 'pictogram_login.html', {'persons': persons, 'pictograms': Pictogram.objects.all()})
+
+    # Obtener todos los pictogramas para mostrarlos
+    all_pictograms = list(Pictogram.objects.all())
+    return render(request, 'pictogram_login.html', {'persons': persons, 'pictograms': all_pictograms})
+
+
 
 
 @user_passes_test(is_admin)

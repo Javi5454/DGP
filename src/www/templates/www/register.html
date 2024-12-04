@@ -10,6 +10,21 @@
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style>
+        .preview-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 10px;
+            border: 2px solid var(--dark-blue);
+            object-fit: cover;
+            display: none; /* Oculta la imagen hasta que se cargue */
+            margin: 0 auto; /* Centra la imagen horizontalmente */
+        }
+    </style>
 </head>
 <body class="body-centered body-centered-register">
     <!-- Botón REGISTRO CON PICTOGRAMAS -->
@@ -27,6 +42,10 @@
             {% csrf_token %}
             {{ form.as_p }}
 
+            <div class="preview-container">
+                <img id="image-preview" class="image-preview" alt="Vista previa de la imagen">
+            </div>
+
             <!-- Mostrar mensajes de error o éxito -->
             {% if messages %}
                 <div class="alert alert-danger mt-2">
@@ -39,5 +58,25 @@
             <button type="submit" class="btn btn-login-admin btn-block mt-3 btn-register">REGISTRAR USUARIO</button>
         </form>
     </div>
+
+    <script>
+        const profilePictureInput = document.getElementById("id_picture");
+        const imagePreview = document.getElementById("image-preview");
+
+        profilePictureInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Muestra la imagen
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+                imagePreview.style.display = "none"; // Oculta la imagen si no hay archivo
+            }
+        });
+    </script>
 </body>
 </html>
