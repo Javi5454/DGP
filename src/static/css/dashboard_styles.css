@@ -1,0 +1,217 @@
+:root {
+    --dark-blue: #3d5a80;
+    --light-blue: #98c1d9;
+    --lighter-blue: #e0fbfc;
+    --orange: #de4f2b;
+    --navy: #131c81;
+    --soft-orange: #f7b683;
+    --soft-blue: #9bd0c8;
+    --my-blue: #2b9dda;
+    --white: #ffffff;
+}
+
+/* Fondo y colores generales */
+body {
+    font-family: Arial, sans-serif;
+    color: var(--navy);
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal con fondo */
+.container-fluid {
+    padding: 20px;
+    background-color: var(--my-blue); /* Fondo azul muy claro */
+    border-radius: 10px;
+}
+
+/* Modificar el contenedor del navbar */
+.container {
+    max-width: 100%;  /* Cambiar a 100% para usar todo el ancho */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;  /* Padding mínimo */
+}
+
+.container-fluid {
+    padding: 20px;
+    background-color: var(--lighter-blue);
+    border-radius: 10px;
+    margin-top: 180px;
+}
+
+/* Navbar superior */
+.navbar {
+    padding: 0.5rem 1rem;
+    min-height: 80px;
+}
+
+.navbar.fixed-top {
+    background-color: var(--soft-orange);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 5px;
+}
+
+/* Logo y foto de usuario */
+.navbar-logo {
+    width: 100px;  /* Aumentado de 60px */
+    height: 100px; /* Aumentado de 60px */
+    object-fit: contain;
+    margin-left: 0; /* Para pegarlo más a la izquierda */
+}
+
+.user-photo {
+    width: 90px;    /* Aumentado de 50px */
+    height: 90px;   /* Aumentado de 50px */
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--dark-blue); /* Borde más grueso para mejor visibilidad */
+}
+
+/* Mensaje de bienvenida */
+.welcome-background {
+    background-color: var(--white); /* Fondo azul suave */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.welcome-message {
+    color: var(--my-blue); /* Texto en tono navy oscuro */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Login Box */
+.login-box {
+    background-color: #ffffff; /* Fondo azul muy claro */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.login-box h2 {
+    color: var(--navy);
+    margin-bottom: 20px;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--light-blue);
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #ffffff;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background-color: var(--navy); /* Botón oscuro */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+    background-color: var(--navy); /* Color más oscuro al pasar el cursor */
+    color: #ffffff;
+}
+
+/* Navbar fija en la parte inferior */
+.navbar.fixed-bottom {
+    background-color: var(--my-blue); /* Fondo anaranjado suave */
+    height: 70px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.navbar-logo {
+    width: 50px;
+    height: auto;
+}
+
+.user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+    border: 2px solid var(--my-blue);
+}
+
+.logout-container {
+    display: flex;
+    align-items: center;
+}
+
+.custom-logout-btn {
+    background-color: var(--dark-blue);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-logout-btn:hover {
+    background-color: var(--navy);
+    color: #ffffff;
+}
+
+/* Estilo para los pictogramas */
+.pictogram-card {
+    background-color: #ffffff;
+    border: 1px solid var(--my-blue);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.pictogram-card:hover {
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+/* Contenido principal */
+/* Ajustar espacio del contenido principal */
+.content-container {
+    margin-top: 160px;
+    padding: 20px;
+}

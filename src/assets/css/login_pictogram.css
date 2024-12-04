@@ -2,17 +2,19 @@
 
 /* Paleta de colores */
 :root {
-    --dark-blue: #3d5a80;
+    --dark-blue: #047cd7;
     --light-blue: #98c1d9;
     --lighter-blue: #e0fbfc;
     --orange: #de4f2b;
-    --navy: #293241;
+    --navy: #131c81;
     --soft-orange: #f7b683;
     --soft-blue: #9bd0c8;
+    --my-blue: #51abdb;
+    --white: #ffffff;
 }
 
 body {
-    background-color: var(--soft-orange); /* Color de fondo de la pantalla completa */
+    background-color: var(--white); /* Color de fondo de la pantalla completa */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,11 +31,11 @@ body {
     height: 100%;
     width: 100%;
     padding: 20px;
-    color: var(--dark-blue);
+    color: var(--navy);
 }
 
 .login-box {
-    background-color: var(--soft-blue);
+    background-color: var(--my-blue);
     padding: 20px; /* Reducimos el padding interno */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -43,7 +45,7 @@ body {
     overflow-y: hidden; /* Ocultamos el desplazamiento */
     text-align: center;
     box-sizing: border-box;
-    color: var(--dark-blue) !important;
+    color: var(--white) !important;
 }
 
 .logo {
@@ -110,7 +112,7 @@ h2 {
 }
 
 .clear-button {
-    background-color: #ff4d4d;
+    background-color: var(--dark-blue);
     border: none;
     color: white;
     font-size: 14px; /* Reducimos el tamaño de fuente */
@@ -123,7 +125,7 @@ h2 {
 }
 
 .clear-button:hover {
-    background-color: #ff3333;
+    background-color: var(--navy);
 }
 
 .error-message {
@@ -131,7 +133,7 @@ h2 {
     font-size: 18px; /* Reducimos el tamaño de fuente */
     font-weight: bold;
     color: white;
-    background-color: #ff4d4d;
+    background-color: var(--navy);
     padding: 10px 15px; /* Reducimos el padding */
     border-radius: 8px;
     margin-top: 15px;
@@ -148,7 +150,7 @@ h2 {
     flex-direction: column; /* Coloca la imagen debajo del texto */
     align-items: center;
     padding: 20px;
-    background-color: var(--dark-blue); /* Fondo azul oscuro */
+    background-color: var(--my-blue); /* Fondo azul oscuro */
     color: white; /* Texto en blanco */
     font-weight: bold;
     border-radius: 5px;
@@ -160,8 +162,8 @@ h2 {
 }
 
 .alfanum-button:hover {
-    background-color: var(--soft-blue); /* Fondo cambia a azul claro */
-    color: var(--dark-blue); /* Texto cambia a azul oscuro */
+    background-color: var(--dark-blue); /* Fondo cambia a azul claro */
+    color: var(--white); /* Texto cambia a azul oscuro */
 }
 
 .button-image {
