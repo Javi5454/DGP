@@ -4,6 +4,7 @@ from .models import DinnerTask, Menu
 from .forms import DinnerTaskForm, MenuForm
 import os
 from django.conf import settings
+from django.core.files.base import ContentFile
 
 # Create your views here.
 
@@ -13,6 +14,19 @@ def is_admin(user):
         return user.person.role in ['admin']
     except:
         return False
+    
+#Copia profunda de imagen
+def deep_copy_image_field(old, new):
+    if old.image and old.image.name:
+        #Verifica si hay una imagen
+        old_image_content = old.image.read()
+
+        #Creamos un archivo con el mismo contenido
+        new_image_name = f"copy_of_{old.image.name.split('/')[-1]}"
+        new.image.save(new_image_name, ContentFile(old_image_content))
+
+        #Guardamos la nueva instancia
+        new.save()
 
 # CREAR TAREA COMANDA
 @user_passes_test(is_admin)
@@ -51,18 +65,20 @@ def manage_menus(request):
 def edit_menu(request, menu_id):
     # Obtén la instancia del menú a editar
     old_menu = get_object_or_404(Menu, id=menu_id)
-    
+
     if request.method == 'POST':
         form = MenuForm(request.POST, request.FILES)
         if form.is_valid():
             # Crear una nueva instancia con los datos del formulario
             new_menu = form.save(commit=False)
             
+            if not new_menu.image:
+                deep_copy_image_field(old_menu, new_menu)
+            else:
+                new_menu.save()
+            
             # Elimina la instancia anterior
             old_menu.delete()
-            
-            # Guarda la nueva instancia en la base de datos
-            new_menu.save()
 
             # Redirige a la página de gestión de menús
             return redirect('manage_menus')

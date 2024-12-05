@@ -20,19 +20,21 @@
                 <h1 class="text-center mb-4">Editar Menú</h1>
 
                 <!-- Formulario para editar menú -->
-                <form method="post" enctype="multipart/form-data" action="{% url 'manage_menus' %}">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'edit_menu' menu_id=menu.id %}">
                     {% csrf_token %}
                     <!-- Mostrar imagen actual -->
                     <div class="mb-3 text-center">
                         <label><strong>Imagen Actual:</strong></label>
                         <br>
-                        <img src="{{ menu.image.url }}" alt="Imagen del menú" style="background-color: var(--white); width: 200px; height: auto; margin-top: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <img src="{{ menu.image.url }}" alt="Imagen del menú"
+                            style="background-color: var(--white); width: 200px; height: auto; margin-top: 10px; border: 1px solid #ddd; border-radius: 5px;">
                     </div>
 
                     <!-- Editar texto asociado -->
                     <div class="mb-3">
                         <label for="description"><strong>Nombre del menú:</strong></label>
-                        <input type="text" id="description" name="description" value="{{ menu.description }}" class="form-control">
+                        <input type="text" id="description" name="description" value="{{ menu.description }}"
+                            class="form-control">
                     </div>
 
                     <!-- Editar imagen -->
@@ -41,15 +43,41 @@
                         <input type="file" id="image" name="image" accept="image/*" class="form-control">
                     </div>
 
+                    <!-- Contenedor de vista previa de la imagen -->
+                    <div class="preview-container">
+                        <img id="image-preview" src="" alt="Vista previa" class="image-preview">
+                    </div>
+
                     <!-- Botón de guardar -->
-                    <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+                    <button class="btn btn-primary w-100">Guardar Cambios</button>
                 </form>
 
                 <!-- Botón para volver -->
-                <a href="{% url 'manage_menus' %}" class="btn btn-secondary w-100 mt-3">Volver</a>
+                <a href="{% url 'manage_menus' %}" class="btn w-100 mt-3 custom-btn3">Volver</a>
             </div>
         </div>
     </div>
+
+    <script>
+        const profilePictureInput = document.getElementById("image");
+        const imagePreview = document.getElementById("image-preview");
+
+        profilePictureInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Muestra la imagen
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+                imagePreview.style.display = "none"; // Oculta la imagen si no hay archivo
+            }
+        });
+    </script>
+
 </body>
 
 </html>
