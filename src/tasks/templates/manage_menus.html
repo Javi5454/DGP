@@ -33,6 +33,11 @@
                         <label for="image" style="color: white; font-weight: bold; margin-bottom: 8px; display: inline-block;">Selecciona una imagen*:</label>
                         <input type="file" id="image" name="image" accept="image/*" class="form-control">
                     </div>
+
+                    <!-- Contenedor de vista previa de la imagen -->
+                    <div class="preview-container">
+                        <img id="image-preview" src="" alt="Vista previa" class="image-preview">
+                    </div>
                 
                     <button type="submit" class="btn custom-btn w-100 mt-3">Guardar Menú</button>
                 </form>
@@ -71,6 +76,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const profilePictureInput = document.getElementById("image");
+        const imagePreview = document.getElementById("image-preview");
+
+        profilePictureInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Muestra la imagen
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+                imagePreview.style.display = "none"; // Oculta la imagen si no hay archivo
+            }
+        });
+    </script>
+
 </body>
 
 </html>

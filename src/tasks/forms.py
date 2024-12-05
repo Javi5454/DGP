@@ -33,18 +33,6 @@ class DinnerTaskForm(forms.ModelForm):
         }
 
 
-class MenuForm(forms.ModelForm):
-    class Meta:
-        model = Menu
-        fields = ['description', 'image']
-        labels = {
-            'description': 'Nombre del Menú',
-            'image': 'Pictograma Asociado',
-        }
-        widgets = {
-            'description': forms.TextInput(attrs={'class': 'form-control'}),
-            'pictoimagegram': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-        }
 
 class MenuForm(forms.ModelForm):
     class Meta:
