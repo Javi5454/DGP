@@ -19,6 +19,8 @@ body {
     font-family: Arial, sans-serif;
     background-color: var(--white);
     color: var(--my-blue);
+    height: auto;     
+    overflow-y: scroll; 
 }
 
 .custom-card {
