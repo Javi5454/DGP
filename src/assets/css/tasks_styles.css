@@ -6,6 +6,8 @@
     --light-blue: #98c1d9;
     --lighter-blue: #e0fbfc;
     --orange: #de4f2b;
+    --rojito: #ea6767;
+    --rojo: #f34e4e;
     --navy: #131c81;
     --soft-orange: #f7b683;
     --soft-blue: #9bd0c8;
@@ -17,6 +19,8 @@ body {
     font-family: Arial, sans-serif;
     background-color: var(--white);
     color: var(--my-blue);
+    height: auto;     
+    overflow-y: scroll; 
 }
 
 .custom-card {
@@ -54,8 +58,38 @@ body {
     border-color: var(--navy);
 }
 
+.btn.custom-btn3 {
+    background-color: var(--rojito);
+    color: white;
+    border-color: var(--rojito);
+}
+
+.btn.custom-btn3:hover {
+    background-color: var(--rojo);
+    color: white;
+    border-color: var(--rojo);
+}
+
 .form-select img {
     margin-right: 10px;
     border-radius: 50%;
     vertical-align: middle;
+}
+
+.preview-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.image-preview {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    border: 2px solid var(--dark-blue);
+    background-color: var(--white);
+    object-fit: cover;
+    display: none; /* Oculta la imagen hasta que se cargue */
 }

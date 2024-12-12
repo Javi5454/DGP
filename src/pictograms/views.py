@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Person, Pictogram, PictogramSequence, PictogramOrder
-from .forms import PersonalDataForm, PictogramPasswordForm
+from .forms import UserRegistrationForm, PictogramPasswordForm
 from django.core.files.storage import default_storage
 from django.core.files.base import File
 
@@ -55,7 +55,7 @@ def login_pictogram2(request, username):
 @user_passes_test(is_admin)
 def register_pictogram1(request):
     if request.method == 'POST':
-        form = PersonalDataForm(request.POST, request.FILES)
+        form = UserRegistrationForm(request.POST, request.FILES)
         
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
@@ -72,7 +72,7 @@ def register_pictogram1(request):
 
             return redirect('register_pictogram2')
     else:
-        form = PersonalDataForm()
+        form = UserRegistrationForm()
 
     return render(request, 'register_pictogram1.html', {'form' : form})
 

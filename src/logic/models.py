@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from django.contrib.auth.models import User
+from tasks.models import TaskType
 
 # To manage uploads of user photos
 def person_picture_upload_path(instance, original_filename):
@@ -28,7 +29,8 @@ class Person(models.Model):
     )
     picture = models.ImageField(upload_to=person_picture_upload_path)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='student')
-
+    task_types = models.ManyToManyField(TaskType, related_name='persons')
+    
     class Meta:
         ordering = ['user__last_name', 'user__first_name']
 
