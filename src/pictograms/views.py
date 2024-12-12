@@ -39,8 +39,9 @@ def verify_pictogram(request):
     
     return JsonResponse({"error": "Método no permitido"}, status=405)
 
+
 def login_pictogram1(request):
-    persons = Person.objects.distinct()  # Eliminar duplicados
+    persons = Person.objects.filter(pictogramsequence__isnull=False).distinct()  # Eliminar duplicados
     return render(request, 'login_pictogram1.html', {'persons': persons})
 
 

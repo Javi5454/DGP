@@ -2,124 +2,36 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Seleccionar Usuario</title>
+    <title>Login Pictograma</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/login_pictogram.css' %}">
-    <style>
-        .user-selection-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: var(--light-orange);
-        }
-
-        .user-selection-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--soft-blue);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            width: 80%; /* Más ancho */
-            height: auto; /* Elimina la longitud fija */
-            max-width: 1200px; /* Limita el ancho máximo */
-        }
-
-        .user-selection-title {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: var(--dark-blue);
-            text-align: center;
-        }
-
-        .person-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta columnas automáticamente */
-            gap: 20px;
-            justify-items: center;
-            width: 100%;
-        }
-
-        .person-card {
-            text-align: center;
-            cursor: pointer;
-            background: #fff;
-            border-radius: 8px;
-            padding: 15px;
-            transition: transform 0.3s ease;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .person-card:hover {
-            transform: scale(1.1);
-        }
-
-        .person-card img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .person-card p {
-            margin-top: 10px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .alfanum-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: var(--dark-blue);
-            color: white;
-            text-align: center;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .alfanum-button img {
-            width: 50px;
-            margin-bottom: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <div class="user-selection-container">
-        <!-- Botón Login Alfanumérico -->
-        <a href="{% url 'login' %}" class="alfanum-button">
-            <img src="{% static 'images/login_alfanum.png' %}" alt="Logo de alfanumérico">
-            <span>ALFANUMÉRICO</span>
-        </a>
+<body class="body-centered">
+    <!-- Botón Alfanumerico con imagen debajo del texto -->
+    <a href="{% url 'login' %}" class="pictogramas-button">
+        <span>ALFANUMERICO</span>
+        <img src="{% static 'images/login_alfanum.png' %}" alt="Logo de la app" class="button-image">
+    </a>
 
-        <!-- Cuadro de selección de usuario -->
-        <div class="user-selection-box">
-            <h1 class="user-selection-title">Seleccionar Usuario</h1>
-            <div class="person-grid">
-                {% for person in persons %}
-                    <a href="{% url 'login_pictogram2' person.user.username %}">
-                        <div class="person-card">
-                            <img src="{{ person.picture.url }}" alt="Imagen de {{ person.user.first_name }}">
-                            <p>{{ person.user.first_name }}</p>
-                        </div>
-                    </a>
-                {% endfor %}
+    <div class="welcome-container static-container">
+        <!-- Logo de la aplicación -->
+        <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+
+        <h1 class="mt-4">Seleccione un usuario</h1>
+
+        <div class="d-flex justify-content-between">
+            {% for person in persons %}
+            <div class="p-5 user-card">
+                <img src="{{person.picture.url}}" alt="{{ person.user.firstname}} {{person.user.lastname}}" class="user-image">
+                <div class="user-info">
+                    <h3>{{person.user.last_name}}, {{person.user.first_name}}</h3>
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </body>
