@@ -30,11 +30,20 @@
 </head>
 
 <body class="body-centered">
+
+    <!-- Botón REGISTRO ALFANUM -->
+    <a href="{% url 'register' %}" class="pictogramas-button">
+        <span>REGISTRO ALFANUMÉRICO</span>
+        <img src="{% static 'images/register_alfanum.png' %}" alt="Logo de la app" class="button-image">
+    </a>
+
     <div class="register-container">
         <div class="register-box" style="background-color: var(--my-blue); color: #FFF; text-align: center;">
-            <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo" class="logo mx-auto d-block mb-4" style="width: 80px;">
+            <div class="logo-container">
+                <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+            </div>
             <h1 class="text-center"><strong>REGISTRO DE USUARIO</strong></h1>
-            <p class="text-center">Paso 1: Introduce los datos personales</p>
+            <h2 class="text-center">Paso 1: Introduce los datos personales</h2>
 
             <!-- Formulario de Datos Personales -->
             <form method="post" action="{% url 'register_pictogram1' %}" enctype="multipart/form-data">
@@ -47,7 +56,7 @@
                 </div>
 
                 <!-- Botón para pasar al siguiente paso -->
-                <button type="submit" class="btn btn-login-admin btn-block mt-3">Establecer Contraseña</button>
+                <button type="submit" class="btn btn-login-admin btn-block mt-3">IR A PASO 2: ESTABLECER CONTRASEÑA</button>
             </form>
         </div>
     </div>
