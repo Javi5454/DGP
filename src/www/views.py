@@ -9,7 +9,11 @@ from tasks.models import DinnerTask
 
 # Función para verificar si el usuario es un administrador
 def is_admin(user):
-    return user.is_staff
+    '''Check if the user is a teacher or admin'''
+    try:
+        return user.person.role in ['admin']
+    except:
+        return False
 
 # Página de bienvenida accesible para todos, muestra opciones de login
 def home(request):
