@@ -165,7 +165,8 @@ body {
 }
 
 .btn-login-admin:hover {
-    background-color: white;
+    background-color: var(--navy);
+    color: white;
 }
 
 /* Estilo para el botón "Registro" */
@@ -196,7 +197,7 @@ body {
     /* Coloca la imagen debajo del texto */
     align-items: center;
     padding: 20px;
-    background-color: var(--dark-blue);
+    background-color: var(--my-blue);
     /* Fondo azul oscuro */
     color: white;
     /* Texto en blanco */
@@ -212,7 +213,7 @@ body {
 }
 
 .pictogramas-button:hover {
-    background-color: var(--my-blue);
+    background-color: var(--dark-blue);
     /* Fondo cambia a azul claro */
     color: var(--white);
     /* Texto cambia a azul oscuro */

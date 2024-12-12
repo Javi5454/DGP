@@ -157,11 +157,28 @@ body {
     align-items: center;
 }
 
+.custom-btn {
+    background-color: var(--my-blue);
+    color: #ffffff;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 5px;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-btn:hover {
+    background-color: var(--dark-blue);
+    color: #ffffff;
+}
+
 .custom-logout-btn {
     background-color: var(--dark-blue);
     color: #ffffff;
     border: none;
-    padding: 10px 20px;
+    padding: 20px 30px;
     border-radius: 5px;
     font-size: 1rem;
     font-weight: bold;
@@ -200,4 +217,11 @@ body {
 .content-container {
     margin-top: 160px;
     padding: 20px;
+}
+
+.vertical-buttons {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    align-items: center; /* Centra los botones horizontalmente */
+    gap: 15px; /* Espaciado entre botones */
 }

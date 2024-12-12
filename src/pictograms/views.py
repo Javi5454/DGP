@@ -13,7 +13,11 @@ import random
 import json
 
 def is_admin(user):
-    return user.is_staff
+    '''Check if the user is a teacher or admin'''
+    try:
+        return user.person.role in ['admin']
+    except:
+        return False
 
 def verify_pictogram(request):
     if request.method == 'POST':
