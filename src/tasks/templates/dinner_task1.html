@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de Aula para Comanda Comedor</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 custom-title"><strong>¿EN QUÉ AULA ESTÁS?</strong></h1>
+        <div class="row justify-content-center">
+            {% for classroom in classrooms %}
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'dinner_task2' classroom.id %}" class="btn custom-btn4 w-100">
+                    <div class="text-center">
+                        <img src="{{ classroom.image.url }}" class="image-preview2 mb-2">
+                        <p><strong>{{ classroom.description }}</strong></p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

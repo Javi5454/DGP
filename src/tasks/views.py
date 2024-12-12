@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
-from .models import DinnerTask, Menu
-from .forms import DinnerTaskForm, MenuForm
+from .models import DinnerTask, Menu, Classroom
+from .forms import DinnerTaskForm, MenuForm, ClassroomForm
 import os
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -24,6 +24,7 @@ def deep_copy_image_field(old, new):
         #Guardamos la nueva instancia
         new.save()
 
+############
 # CREAR TAREA COMANDA
 @user_passes_test(is_admin)
 def create_dinner_task(request):
@@ -37,6 +38,18 @@ def create_dinner_task(request):
     return render(request, 'create_dinner_task.html', {'form':form})
 
 
+###############
+# COMANDA
+def dinner_task1(request):
+    classrooms = Classroom.objects.all()
+    return render(request, 'dinner_task1.html', {'classrooms': classrooms})
+
+def dinner_task2(request, classroom_id):
+    classroom = get_object_or_404(Classroom, id=classroom_id)
+    menus = Menu.objects.all()  # Verifica que este queryset contenga menús válidos
+    return render(request, 'dinner_task2.html', {'classroom': classroom, 'menus': menus})
+##########
+# MENU
 @user_passes_test(is_admin)
 def manage_menus(request):
     if request.method == 'POST':
@@ -89,3 +102,59 @@ def delete_menu(request, menu_id):
     menu = get_object_or_404(Menu, id=menu_id)
     menu.delete()
     return redirect('manage_menus')
+
+
+###################
+# CLASSROOOM
+@user_passes_test(is_admin)
+def manage_classrooms(request):
+    if request.method == 'POST':
+        form = ClassroomForm(request.POST, request.FILES)
+        if form.is_valid():
+            classroom = form.save(commit=False)
+            
+            # Si no se sube un archivo nuevo, reutiliza el existente
+            if not request.FILES.get('image') and form.cleaned_data.get('image'):
+                classroom.image = form.cleaned_data['image']
+
+            classroom.save()
+            return redirect('manage_classrooms')
+    else:
+        form = ClassroomForm()
+
+    classrooms = Classroom.objects.all()
+    return render(request, 'manage_classrooms.html', {'form': form, 'classrooms': classrooms})
+
+
+@user_passes_test(is_admin)
+def edit_classroom(request, classroom_id):
+    # Obtén la instancia del aula a editar
+    old_classroom = get_object_or_404(Classroom, id=classroom_id)
+
+    if request.method == 'POST':
+        form = ClassroomForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Crear una nueva instancia con los datos del formulario
+            new_classroom = form.save(commit=False)
+            
+            if not new_classroom.image:
+                deep_copy_image_field(old_classroom, new_classroom)
+            else:
+                new_classroom.save()
+            
+            # Elimina la instancia anterior
+            old_classroom.delete()
+
+            # Redirige a la página de gestión de aulas
+            return redirect('manage_classrooms')
+    else:
+        # Prellenar el formulario con los datos del aula actual
+        form = ClassroomForm(instance=old_classroom)
+    
+    return render(request, 'edit_classroom.html', {'form': form, 'classroom': old_classroom})
+
+@user_passes_test(is_admin)
+def delete_classroom(request, classroom_id):
+    classroom = get_object_or_404(Classroom, id=classroom_id)
+    classroom.delete()
+    return redirect('manage_classrooms')
