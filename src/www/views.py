@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from .forms import UserRegistrationForm
 from logic.models import Person
+from tasks.models import DinnerTask
 
 # Función para verificar si el usuario es un administrador
 def is_admin(user):
@@ -39,7 +40,9 @@ def login_view(request):
 # Dashboard para usuarios generales (estudiantes y profesores)
 @login_required
 def dashboard(request):
+    # Filtrar tareas solo si el usuario es un estudiante
     return render(request, 'dashboard.html')
+    
 
 # Dashboard específico para administradores
 @login_required

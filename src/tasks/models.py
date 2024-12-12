@@ -2,6 +2,7 @@ from django.db import models
 import os
 from django.conf import settings
 
+
 # Create your models here.
 class DinnerTask(models.Model):
     student = models.ForeignKey('logic.Person', on_delete=models.CASCADE, related_name="dinner_tasks")

@@ -9,11 +9,7 @@ from django.core.files.base import ContentFile
 # Create your views here.
 
 def is_admin(user):
-    '''Check if the user is a teacher or admin'''
-    try:
-        return user.person.role in ['admin']
-    except:
-        return False
+    return user.is_staff
     
 #Copia profunda de imagen
 def deep_copy_image_field(old, new):
