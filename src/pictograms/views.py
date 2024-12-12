@@ -15,37 +15,39 @@ import json
 def is_admin(user):
     return user.is_staff
 
-
-def pictogram_login(request):
+def verify_pictogram(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        username = data.get('person_id')
-        selected_sequence = data.get('pictogram_sequence', [])
+        user_id = request.POST.get('user_id')
+        sequence = request.POST.get('sequence', '').split(',')
 
         # Obtener la persona asociada al usuario seleccionado
-        person = get_object_or_404(Person, user__username=username)
-
-        # Obtener la secuencia de pictogramas correcta
+        person = get_object_or_404(Person, user_id=user_id)
+        
+        
         try:
+            # Obtener la secuencia correcta de pictogramas
             pictogram_sequence = PictogramSequence.objects.get(person=person)
+            correct_sequence = [str(po.pictogram.id) for po in pictogram_sequence.pictogramorder_set.order_by('order')]
         except PictogramSequence.DoesNotExist:
-            return JsonResponse({"error": "Secuencia de pictogramas no encontrada para esta persona."}, status=400)
+            return JsonResponse({"success": False, "message": "No hay secuencia asociada para este usuario."})
 
-        correct_sequence = [str(po.pictogram.id) for po in pictogram_sequence.pictogramorder_set.order_by('order')]
-
-        # Verificar si la secuencia seleccionada es correcta
-        if selected_sequence == correct_sequence:
-            login(request, person.user)  # Iniciar sesión del usuario
-            return JsonResponse({"success": True, "redirect_url": "/dashboard"})  # Redirigir al dashboard
+        # Validar si la secuencia seleccionada es correcta
+        if sequence == correct_sequence:
+            return JsonResponse({"success": True, "redirect_url": "/dashboard/"})
         else:
-            return JsonResponse({"success": False, "message": "Secuencia incorrecta."})
+            return JsonResponse({"success": False, "message": "Secuencia incorrecta"})
+    
+    return JsonResponse({"error": "Método no permitido"}, status=405)
 
-    # Obtener todos los usuarios con secuencia de pictogramas asociada
-    persons = Person.objects.filter(pictogramsequence__isnull=False)
+def login_pictogram1(request):
+    persons = Person.objects.distinct()  # Eliminar duplicados
+    return render(request, 'login_pictogram1.html', {'persons': persons})
 
-    # Obtener todos los pictogramas para mostrarlos
-    all_pictograms = list(Pictogram.objects.all())
-    return render(request, 'pictogram_login.html', {'persons': persons, 'pictograms': all_pictograms})
+
+def login_pictogram2(request, username):
+    user = get_object_or_404(User, username=username)
+    pictograms = Pictogram.objects.all()
+    return render(request, 'login_pictogram2.html', {'user': user, 'pictograms': pictograms})
 
 
 
