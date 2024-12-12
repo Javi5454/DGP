@@ -15,36 +15,252 @@
 body {
     background-color: var(--white);
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    min-height: 100vh; /* Altura completa de la ventana */
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    min-height: 100vh;
+    /* Altura completa de la ventana */
     color: var(--my-blue);
     font-family: Arial, sans-serif;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.body-centered {
+    justify-content: center;
+    align-items: center;
+}
+
+.body-centered-register {
+    background-color: var(--white) !important;
+}
+
+/* Contenedor de bienvenida como botón */
+.welcome-container {
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--my-blue);
+    max-width: 600px;
+    margin: 20px;
+    font-size: 1.2em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.welcome-container:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
+}
+
+.welcome-container-register {
+    background-color: var(--my-blue) !important;
+    color: var(--white) !important;
+}
+
+.welcome-container-register:hover {
+    background-color: var(--dark-blue) !important;
+    color: #fff !important;
 }
 
 /* Contenedor del registro */
 .register-container {
     background-color: var(--my-blue);
-    padding: 20px; /* Espaciado interno */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    padding: 20px;
+    /* Espaciado interno */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra */
+    color: var(--white) !important;
+}
+
+.static-container {
+    max-width: 1000px;
+    /* Aumenta el ancho máximo */
+    padding: 80px;
+    /* Aumenta el relleno */
+    font-size: 1.5em;
+    /* Tamaño de fuente más grande para el contenido */
+}
+
+.static-container:hover {
+    background-color: var(--my-blue);
+    /* Color de fondo original sin cambio */
+    color: var(--white);
+    /* Color de texto original */
 }
 
 /* Logo */
 .logo {
-    max-width: 150px; /* Tamaño del logo */
+    max-width: 150px;
+    /* Tamaño del logo */
 }
 
-/* Botón de envío */
+* Logo más grande específico para el login */ .logo-large {
+    max-width: 300px;
+    /* Ajusta el tamaño según tus necesidades */
+}
+
+/* Título */
+.welcome-title {
+    font-size: 2em;
+    /* Tamaño de fuente más grande */
+    font-weight: bold;
+    color: inherit;
+    /* Inherit color for hover effect */
+    margin-bottom: 20px;
+}
+
+/* Estilo para el título principal */
+.main-title {
+    color: var(--my-blue);
+    /* Texto en blanco */
+    text-align: center;
+    /* Centrado horizontal */
+    margin-top: 40px;
+    /* Espacio desde el borde superior */
+    font-size: 4em;
+    /* Tamaño de fuente aumentado */
+    font-weight: bold;
+    /* Texto en negrita */
+    width: 100%;
+    /* Anchura completa */
+    position: absolute;
+    /* Posición fija en la parte superior */
+    top: 20px;
+    /* Colocación un poco más abajo desde la parte superior */
+    left: 50%;
+    /* Centro horizontal relativo */
+    transform: translateX(-50%);
+    /* Ajuste para centrar */
+}
+
+/* Estilo para el botón "Iniciar Sesión" */
 .btn-login-admin {
+    border: 2px solid var(--dark-blue);
+    /* Borde azul marino */
+    background-color: var(--dark-blue);
+    /* Fondo azul marino */
+    color: white;
+    /* Texto en blanco */
+    font-size: 1.2em;
+    /* Tamaño de fuente del botón aumentado */
+    font-weight: bold;
+    padding: 15px 30px;
+    /* Aumenta el relleno del botón */
+    transition: all 0.3s;
+    /* Transición para el cambio de color */
     border: 2px solid var(--dark-blue);
     background-color: var(--dark-blue);
     color: white;
     font-size: 1.2em;
-    font-weight: bold;
 }
 
 .btn-login-admin:hover {
     background-color: white;
+}
+
+/* Estilo para el botón "Registro" */
+.btn-register {
+    border: 2px solid var(--dark-blue) !important;
+    background-color: var(--dark-blue) !important;
+    color: var(white) !important;
+}
+
+.btn-register:hover {
+    background-color: var(--navy) !important;
+    border: 2px solid var(--navy) !important;
+    color: var(--white) !important;/
+}
+
+/* Desactivar efecto de hover en contenedores específicos */
+.no-hover-effect:hover {
+    background-color: var(--my-blue);
+    /* Mantener color de fondo en hover */
+    color: var(--white);
+    /* Mantener color de texto en hover */
+}
+
+/* Botón de Registro con Pictogramas */
+.pictogramas-button {
+    display: flex;
+    flex-direction: column;
+    /* Coloca la imagen debajo del texto */
+    align-items: center;
+    padding: 20px;
+    background-color: var(--dark-blue);
+    /* Fondo azul oscuro */
+    color: white;
+    /* Texto en blanco */
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    /* Ajustado a la parte superior */
+    left: 20px;
+    /* Ajustado a la izquierda */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pictogramas-button:hover {
+    background-color: var(--my-blue);
+    /* Fondo cambia a azul claro */
+    color: var(--white);
+    /* Texto cambia a azul oscuro */
+}
+
+.pictogramas-button-register {
+    background-color: var(--dark-blue) !important;
+}
+
+.pictogramas-button-register:hover {
+    background-color: var(--navy) !important;
+    /* Fondo cambia a naranja claro */
+    color: var(--white) !important;
+    /* Texto cambia a naranja */
+}
+
+.button-image {
+    max-width: 300px;
+    /* Tamaño más grande de la imagen */
+    margin-top: 10px;
+    /* Espacio entre texto y imagen */
+}
+
+/* Estilo adicional para el botón en el panel de administración */
+.btn-secondary {
+    background-color: var(--my-blue);
+    /* Usa el color de tu elección */
+    border: 2px solid var(--dark-blue);
     color: var(--dark-blue);
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
+}
+
+/* Botón de inicio de sesión administrador relleno */
+.btn-login-admin-orange {
+    background-color: var(--dark-blue);
+    color: #fff;
+    border: none;
+    display: block;
+    width: 100%;
+}
+
+.btn-login-admin-orange:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
 }

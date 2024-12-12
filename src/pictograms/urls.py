@@ -12,5 +12,5 @@ urlpatterns = [
     path('register_pictogram2/', views.register_pictogram2, name='register_pictogram2'),
 
     path('verify_pictogram/', views.verify_pictogram, name='verify_pictogram'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    #path('dashboard/', views.dashboard, name='dashboard'),
 ]
