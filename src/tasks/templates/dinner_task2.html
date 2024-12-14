@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comanda Comedor - {{ classroom.description }}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+</head>
+<body>
+    <!-- Imagen fija y descripción del aula -->
+    <div class="fixed-classroom-info">
+        <img src="{{ classroom.image.url }}" alt="{{ classroom.description }}">
+        <h3 class="text-center"><strong>{{ classroom.description }}</strong></h3>
+    </div>
+
+    <!-- Contenido desplazable -->
+    <div class="container-fluid mt-5 content-area">
+        <h1 class="text-center mb-4"><strong>Menús</strong></h1>
+        <div class="row justify-content-center">
+            {% for menu in menus %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
+                <div class="card custom-card">
+                    <img src="{{ menu.image.url }}" alt="Imagen de {{ menu.description }}" class="card-img-top image-preview2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ menu.description }}</h5> <!-- Aquí se muestra la descripción -->
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No hay menús disponibles.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Aula</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+</head>
+
+<body style="background-color: var(--white);">
+    {% load crispy_forms_tags %}
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg custom-card" style="width: 60%;">
+            <div class="card-body custom-card">
+                <h1 class="text-center mb-4">Editar Aula</h1>
+
+                <!-- Formulario para editar menú -->
+                <form method="POST" enctype="multipart/form-data" action="{% url 'edit_classroom' classroom_id=classroom.id %}">
+                    {% csrf_token %}
+                    <!-- Mostrar imagen actual -->
+                    <div class="mb-3 text-center">
+                        <label><strong>Imagen Actual:</strong></label>
+                        <br>
+                        <img src="{{ classroom.image.url }}" alt="Imagen del aula"
+                            style="background-color: var(--white); width: 200px; height: auto; margin-top: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+
+                    <!-- Editar texto asociado -->
+                    <div class="mb-3">
+                        <label for="description"><strong>Nombre del aula:</strong></label>
+                        <input type="text" id="description" name="description" value="{{ classroom.description }}"
+                            class="form-control">
+                    </div>
+
+                    <!-- Editar imagen -->
+                    <div class="mb-3">
+                        <label for="image"><strong>Nueva imagen del aula (opcional):</strong></label>
+                        <input type="file" id="image" name="image" accept="image/*" class="form-control">
+                    </div>
+
+                    <!-- Contenedor de vista previa de la imagen -->
+                    <div class="preview-container">
+                        <img id="image-preview" src="" alt="Vista previa" class="image-preview">
+                    </div>
+
+                    <!-- Botón de guardar -->
+                    <button class="btn btn-primary w-100">Guardar Cambios</button>
+                </form>
+
+                <!-- Botón para volver -->
+                <a href="{% url 'manage_classrooms' %}" class="btn w-100 mt-3 custom-btn3">Volver</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const profilePictureInput = document.getElementById("image");
+        const imagePreview = document.getElementById("image-preview");
+
+        profilePictureInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Muestra la imagen
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+                imagePreview.style.display = "none"; // Oculta la imagen si no hay archivo
+            }
+        });
+    </script>
+
+</body>
+
+</html>

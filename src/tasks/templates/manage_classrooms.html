@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Aulas</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+</head>
+
+<body style="background-color: var(--white);">
+    {% load crispy_forms_tags %}
+
+    <!-- Contenedor principal -->
+    <div class="container d-flex justify-content-center align-items-center my-4">
+        <div class="card shadow-lg custom-card" style="width: 70%;"> <!-- Ajustar ancho para mejor visibilidad -->
+            <div class="card-body">
+                <h1 class="mb-4 text-center" style="color: var(--white);">Gestionar Aulas</h1>
+                
+                <!-- Formulario para añadir o editar aula -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3" style="color: white; font-weight: bold;">
+                        {{ form.description|as_crispy_field }}
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="image" style="color: white; font-weight: bold; margin-bottom: 8px; display: inline-block;">Selecciona una imagen*:</label>
+                        <input type="file" id="image" name="image" accept="image/*" class="form-control">
+                    </div>
+
+                    <!-- Contenedor de vista previa de la imagen -->
+                    <div class="preview-container">
+                        <img id="image-preview" src="" alt="Vista previa" class="image-preview">
+                    </div>
+                
+                    <button type="submit" class="btn custom-btn w-100 mt-3">Guardar Aula</button>
+                </form>
+
+                <!-- Tabla de menús existentes -->
+                <h2 class="mt-5 mb-3 text-center" style="color: var(--white);">Aulas Existentes</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle" style="color: white;">Nombre</th>
+                            <th class="text-center align-middle" style="color: white;">Pictograma</th>
+                            <th class="text-center align-middle" style="color: white;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for classroom in classrooms %}
+                        <tr>
+                            <!-- Muestra el nombre del aula centrado -->
+                            <td class="text-center align-middle" style="color: white;">{{ classroom.description }}</td> 
+                            <!-- Muestra la imagen -->
+                            <td class="text-center align-middle">
+                                <img src="{{ classroom.image.url }}" alt="Pictograma de {{ classroom.description }}" 
+                                     style="width: 100px; height: auto;">
+                            </td> 
+                            <!-- Muestra los botones centrados -->
+                            <td class="text-center align-middle">
+                                <a href="{% url 'edit_classroom' classroom.id %}" class="btn custom-btn2 btn-sm ">Editar</a>
+                                <a href="{% url 'delete_classroom' classroom.id %}" class="btn btn-danger btn-sm" 
+                                   onclick="return confirm('¿Estás seguro de eliminar este aula?');">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const profilePictureInput = document.getElementById("image");
+        const imagePreview = document.getElementById("image-preview");
+
+        profilePictureInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Muestra la imagen
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+                imagePreview.style.display = "none"; // Oculta la imagen si no hay archivo
+            }
+        });
+    </script>
+
+</body>
+
+</html>

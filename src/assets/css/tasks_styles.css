@@ -24,10 +24,12 @@ body {
 }
 
 .custom-card {
-    background-color: var(--my-blue) !important;
-    padding: 20px;
-    border-radius: 15px;
-    color: white;
+    max-width: 300px; /* Ancho máximo de las tarjetas */
+    text-align: center;
+    background-color: var(--my-blue);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn.custom-btn {
@@ -44,7 +46,6 @@ body {
     color: var(--white);
     border-color: var(--navy);
 }
-
 
 .btn.custom-btn2 {
     background-color: var(--dark-blue);
@@ -70,6 +71,21 @@ body {
     border-color: var(--rojo);
 }
 
+.btn.custom-btn4 {
+    background-color: var(--my-blue);
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn.custom-btn4:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border-color: var(--dark-blue);
+}
+
 .form-select img {
     margin-right: 10px;
     border-radius: 50%;
@@ -92,4 +108,85 @@ body {
     background-color: var(--white);
     object-fit: cover;
     display: none; /* Oculta la imagen hasta que se cargue */
+}
+
+.image-preview2 {
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 10px;
+    border: 2px solid var(--my-blue);
+    background-color: var(--white);
+    object-fit: cover;
+    margin: 10px auto; /* Añade margen alrededor */
+    display: block; /* Centra la imagen horizontalmente */
+} 
+
+.custom-title {
+    font-size: 5rem !important;
+    margin-bottom: 60px !important; /* Espaciado inferior */
+}
+
+.fixed-classroom-info {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; /* Coloca la descripción debajo de la imagen */
+    align-items: center;
+    background-color: var(--lighter-blue); /* Fondo para destacar */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el contenedor */
+}
+
+.fixed-classroom-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Imagen redonda */
+    border: 2px solid var(--dark-blue);
+    object-fit: cover; /* Ajusta la imagen al contenedor */
+    margin-bottom: 10px; /* Espaciado entre la imagen y la descripción */
+}
+
+.fixed-classroom-info h3 {
+    font-size: 3rem;
+    color: var(--dark-blue);
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.content-area {
+    margin: 0 auto; /* Centra el contenedor principal */
+    max-width: 1200px; /* Reduce el ancho máximo del contenido */
+    margin-top: 130px; /* Espacio para evitar superposición con la barra fija */
+}
+
+.row.justify-content-center {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los menús se ajusten en filas */
+    gap: 20px; /* Espaciado uniforme entre menús */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+}
+
+
+.col-md-4 {
+    display: flex;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    align-items: center; /* Opcional: centra las tarjetas verticalmente dentro de la columna */
+}
+
+.card-img-top {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--white);
+    margin-top: 10px;
 }

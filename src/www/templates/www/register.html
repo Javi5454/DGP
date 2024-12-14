@@ -28,14 +28,18 @@
 </head>
 <body class="body-centered body-centered-register">
     <!-- Botón REGISTRO CON PICTOGRAMAS -->
-    <a href="{% url 'register_pictogram1' %}" class="pictogramas-button pictogramas-button-register">
+    <a href="{% url 'register_pictogram1' %}" class="pictogramas-button">
         <span>REGISTRO CON PICTOGRAMAS</span>
         <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="button-image">
     </a>
 
     <div class="welcome-container no-hover-effect register-container">
-        <!-- Logo de la aplicación -->
-        <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+        <div class="logo-container">
+            <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+        </div>
+
+        <h1 class="text-center"><strong>REGISTRO DE USUARIO</strong></h1>   
+        <h2 class="text-center">Introduce los datos personales</h2>
 
         <!-- Formulario de registro -->
         <form method="post" action="{% url 'register' %}" enctype="multipart/form-data">
@@ -55,7 +59,7 @@
                 </div>
             {% endif %}
 
-            <button type="submit" class="btn btn-login-admin btn-block mt-3 btn-register">REGISTRAR USUARIO</button>
+            <button type="submit" class="btn btn-login-admin btn-block mt-3 btn-register">CONFIRMAR</button>
         </form>
     </div>
 

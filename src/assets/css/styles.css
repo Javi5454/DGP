@@ -197,7 +197,7 @@ body {
     /* Coloca la imagen debajo del texto */
     align-items: center;
     padding: 20px;
-    background-color: var(--my-blue);
+    background-color: var(--dark-blue);
     /* Fondo azul oscuro */
     color: white;
     /* Texto en blanco */
@@ -213,18 +213,18 @@ body {
 }
 
 .pictogramas-button:hover {
-    background-color: var(--dark-blue);
+    background-color: var(--my-blue);
     /* Fondo cambia a azul claro */
     color: var(--white);
     /* Texto cambia a azul oscuro */
 }
 
 .pictogramas-button-register {
-    background-color: var(--dark-blue) !important;
+    background-color: var(--my-blue) !important;
 }
 
 .pictogramas-button-register:hover {
-    background-color: var(--navy) !important;
+    background-color: var(--dark-blue) !important;
     /* Fondo cambia a naranja claro */
     color: var(--white) !important;
     /* Texto cambia a naranja */
@@ -298,4 +298,9 @@ body {
     color: var(--dark-blue);
     font-weight: bold;
     font-size: 0.8em;
+}
+
+.logo-container {
+    margin-bottom: 20px; /* Espacio entre el logo y el formulario */
+    text-align: center; /* Centra el logo horizontalmente */
 }

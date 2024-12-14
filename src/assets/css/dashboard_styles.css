@@ -161,7 +161,7 @@ body {
 }
 
 .custom-btn {
-    background-color: var(--my-blue);
+    background-color: var(--dark-blue);
     color: #ffffff;
     border: none;
     padding: 20px 30px;
@@ -173,7 +173,7 @@ body {
 }
 
 .custom-btn:hover {
-    background-color: var(--dark-blue);
+    background-color: var(--navy);
     color: #ffffff;
 }
 

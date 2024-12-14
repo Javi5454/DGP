@@ -1,5 +1,5 @@
 from django import forms
-from .models import DinnerTask, Menu
+from .models import DinnerTask, Menu, Classroom
 from logic.models import Person
 from django.utils.html import format_html
 import os
@@ -33,13 +33,49 @@ class DinnerTaskForm(forms.ModelForm):
         }
 
 
-
+#############
+# MENU
 class MenuForm(forms.ModelForm):
     class Meta:
         model = Menu
         fields = ['description', 'image']
         labels = {
             'description': 'Nombre del Menú',
+            'image': 'Seleccionar o Cargar Pictograma',
+        }
+        widgets = {
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*',
+            }),
+        }
+
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+
+        if image:
+            import os
+            from django.conf import settings
+
+            # Verificar si el archivo ya existe
+            image_path = os.path.join(settings.MEDIA_ROOT, 'pictogramas', image.name)
+            if os.path.exists(image_path):
+                # Reutilizar la imagen existente
+                return f'pictogramas/{image.name}'
+
+        return image
+    
+
+##############
+# CLASSROOM
+
+class ClassroomForm(forms.ModelForm):
+    class Meta:
+        model = Classroom
+        fields = ['description', 'image']
+        labels = {
+            'description': 'Nombre del Aula',
             'image': 'Seleccionar o Cargar Pictograma',
         }
         widgets = {
