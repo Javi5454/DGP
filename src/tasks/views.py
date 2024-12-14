@@ -10,7 +10,12 @@ from django.core.files.base import ContentFile
 
 def is_admin(user):
     return user.is_staff
-    
+
+def dinner_task_detail(request, task_id):
+    # Obtén la tarea por su ID
+    task = get_object_or_404(DinnerTask, id=task_id)
+    return render(request, 'dinner_task1.html', {'task': task})
+
 #Copia profunda de imagen
 def deep_copy_image_field(old, new):
     if old.image and old.image.name:

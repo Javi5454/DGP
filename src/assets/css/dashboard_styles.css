@@ -24,6 +24,8 @@ body {
     padding: 20px;
     background-color: var(--my-blue); 
     border-radius: 10px;
+    max-width: none; /* Desactiva cualquier limitación de ancho */
+    padding: 20px;
 }
 
 /* Modificar el contenedor del navbar */
@@ -87,11 +89,12 @@ body {
     background-color: var(--white); 
     padding: 20px;
     border-radius: 8px;
+    align-items: center; /* Centra horizontalmente */
 }
 
 .welcome-message {
     color: var(--my-blue); 
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -217,7 +220,15 @@ body {
 .content-container {
     margin-top: 160px;
     padding: 20px;
+    min-height: 5000px;
+    width: 100%;
+    max-width: 1200px; /* Opcional, establece un máximo */
+    margin-left: auto; /* Centra el contenedor horizontalmente */
+    margin-right: auto; /* Centra el contenedor horizontalmente */
+    border: 2px solid red; /* Solo para depuración */
 }
+
+
 
 .vertical-buttons {
     display: flex;
@@ -225,3 +236,38 @@ body {
     align-items: center; /* Centra los botones horizontalmente */
     gap: 15px; /* Espaciado entre botones */
 }
+
+.task-card {
+    background-color: var(--white); /* Fondo blanco para la tarjeta */
+    border: 2px solid var(--light-blue); /* Borde blanco alrededor */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para mayor profundidad */
+    text-align: center; /* Centra todo el contenido */
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: space-between; /* Espaciado uniforme */
+}
+
+.task-card img {
+    width: 80px; /* Tamaño ajustado de la imagen */
+    height: auto;
+    margin: 10px 0;
+}
+
+.task-card h5 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--dark-blue);
+}
+
+.task-card p {
+    margin: 10px 0;
+    color: var(--light-blue);
+}
+
+.task-card .btn {
+    margin-top: 15px;
+}
+

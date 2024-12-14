@@ -39,10 +39,24 @@ def login_view(request):
 
 # Dashboard para usuarios generales (estudiantes y profesores)
 @login_required
-def dashboard(request):
+#def dashboard(request):
     # Filtrar tareas solo si el usuario es un estudiante
-    return render(request, 'dashboard.html')
+#    return render(request, 'dashboard.html')
+
+def dashboard(request):
+    # Verifica si el usuario tiene un perfil Person
+    if hasattr(request.user, 'person'):
+        person = request.user.person
+
+        # Solo procesamos si el rol es 'student'
+        if person.role == 'student':
+            # Obtén todas las tareas asociadas al estudiante y ordénalas por fecha de creación
+            tasks = DinnerTask.objects.filter(student=person).order_by('assigned_at')  # Orden ascendente
+            return render(request, 'dashboard.html', {'tasks': tasks})
     
+    # Si no es estudiante, redirige o muestra un mensaje
+    return render(request, 'error.html', {'message': 'No tienes permisos para acceder a esta página.'})
+
 
 # Dashboard específico para administradores
 @login_required
