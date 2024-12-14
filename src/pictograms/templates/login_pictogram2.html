@@ -1,132 +1,143 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login con Pictogramas</title>
+    <title>Login {{person.user.first_name}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     {% load static %}
-    <style>
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            background-color: #f5f5f5;
-        }
-
-        .user-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-right: 30px;
-        }
-
-        .user-info img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ddd;
-            margin-bottom: 10px;
-        }
-
-        .pictogram-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #d1e7dd;
-            padding: 20px;
-            border-radius: 8px;
-            width: 50%;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .pictogram-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .sequence-indicator {
-            display: flex;
-            margin-top: 20px;
-        }
-
-        .sequence-box {
-            width: 50px;
-            height: 50px;
-            border: 2px dashed #ccc;
-            margin-right: 10px;
-        }
-
-        .clear-button {
-            margin-left: 10px;
-        }
-
-        .error-message {
-            color: red;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <div class="container">
-        <div class="user-info">
-            <!-- Imagen del usuario -->
-            <img src="{{ user.picture.url }}" alt="Imagen de {{ user.first_name }}">
-            <h3>{{ user.first_name }}</h3>
-        </div>
 
-        <div class="pictogram-section">
-            <h2>Seleccionar Pictogramas</h2>
-            {% if error %}
-                <p class="error-message">{{ error }}</p>
-            {% endif %}
-            <form method="post" action="{% url 'verify_pictogram' %}">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{ user.user_id }}">
+<body class="body-centered">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="user-login-pictogram">
+                    <img src="{{person.picture.url}}" alt="{{ person.user.firstname}} {{person.user.lastname}}"
+                        class="user-image-login-pictogram">
+                    <div class="user-info-pictogram">
+                        <h3>{{person.user.last_name}}, {{person.user.first_name}}</h3>
+                    </div>
 
-                <div class="pictogram-grid">
-                    {% for pictogram in pictograms %}
-                        <div class="pictogram-card" onclick="selectPictogram('{{ pictogram.id }}')">
-                            <img src="{{ pictogram.image.url }}" alt="{{ pictogram.description }}" style="width: 100%; height: auto;">
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="welcome-container static-container">
+                    <!-- Logo de la aplicación -->
+                    <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+
+                    <h1 class="mt-4">Seleccione los pictogramas</h1>
+
+                    <!-- Contenedor de mensajes de error -->
+                    <div id="error-message" style="color: red; display: none;"></div>
+
+                    <div class="pictogram-container">
+                        {% for pictogram in pictograms %}
+                        <a href="#"
+                            onclick="selectPictogram('{{ pictogram.id }}', '{{ pictogram.image.url }}'); return false;"
+                            style="text-decoration: none">
+                            <div class="p-5 pictogram-card">
+                                <img src="{{pictogram.image.url}}"
+                                    alt="{{ person.user.firstname}} {{person.user.lastname}}" class="pictogram-image">
+                            </div>
+                        </a>
+                        {% endfor %}
+                        <div class="selected-pictograms">
+                            <div class="selected-pictogram" id="selected1"></div>
+                            <div class="selected-pictogram" id="selected2"></div>
+                            <button class="clear-selection" onclick="clearSelection()">🗑️</button>
                         </div>
-                    {% endfor %}
-                </div>
 
-                <div class="sequence-indicator">
-                    <div class="sequence-box" id="sequence-box-1"></div>
-                    <div class="sequence-box" id="sequence-box-2"></div>
-                    <button type="button" class="btn btn-danger clear-button" onclick="clearSelection()">🗑</button>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Iniciar Sesión</button>
-            </form>
+            </div>
         </div>
     </div>
 
     <script>
-        let selectedSequence = [];
+        let selections = [];
 
-        function selectPictogram(pictogramId) {
-            if (selectedSequence.length < 2) {
-                selectedSequence.push(pictogramId);
-                updateSequenceIndicator();
+        function selectPictogram(pictogramId, imageUrl) {
+            if (selections.length < 2) {
+                selections.push({ id: pictogramId, url: imageUrl });
+                updateSelectedPictograms();
+
+                if (selections.length === 2) {
+                    sendSelections();
+                }
             }
         }
 
-        function updateSequenceIndicator() {
-            for (let i = 0; i < selectedSequence.length; i++) {
-                const box = document.getElementById(`sequence-box-${i + 1}`);
-                box.textContent = selectedSequence[i];
-            }
+        function updateSelectedPictograms() {
+            selections.forEach((selection, index) => {
+                document.getElementById(`selected${index + 1}`).innerHTML = `<img src="${selection.url}" alt="Selected Pictogram" style="width:100%; height:auto; border-radius: 30%">`;
+            });
         }
 
         function clearSelection() {
-            selectedSequence = [];
-            document.getElementById('sequence-box-1').textContent = '';
-            document.getElementById('sequence-box-2').textContent = '';
+            selections = [];
+            document.getElementById('selected1').innerHTML = '';
+            document.getElementById('selected2').innerHTML = '';
         }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
+        function sendSelections() {
+            const username = "{{ person.user.username }}"; // Ensure this is available in your template context
+            const url = `/login_pictogram2/${username}/`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken // Include the CSRF token here
+                },
+                body: JSON.stringify({ selections })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = data.success;
+                    } else if (data.error) {
+                        clearSelection();
+                        showError(data.error);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 3000);
+        }
+
     </script>
+
 </body>
+
 </html>

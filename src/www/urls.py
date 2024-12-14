@@ -11,5 +11,5 @@ urlpatterns = [
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),  # Dashboard para el administrador
     path('register/', views.register, name='register'),
     path('home_register/', views.home_register, name='home_register'),
-    path('tasks/', include('tasks.urls')),  # Incluye las rutas de la aplicación tasks
+    #path('tasks/', include('tasks.urls')),  # Incluye las rutas de la aplicación tasks
 ]

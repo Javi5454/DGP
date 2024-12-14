@@ -51,8 +51,55 @@ def login_pictogram1(request):
 
 def login_pictogram2(request, username):
     user = get_object_or_404(User, username=username)
-    pictograms = Pictogram.objects.all()
-    return render(request, 'login_pictogram2.html', {'user': user, 'pictograms': pictograms})
+    person = get_object_or_404(Person, user=user)
+
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            selections = data.get('selections', [])
+
+            # Verificamos que se hayan seleccionado dos pictogramas
+            if len(selections) != 2:
+                return JsonResponse({'error': 'Debe seleccionar exactamente dos pictogramas.'}, status=400)
+            
+            #Obtenemos la secuencia correcta para esta persona
+            pictogram_sequence = PictogramSequence.objects.get(person=person)
+
+            correct_sequence = list(PictogramOrder.objects.filter(pictogram_sequence=pictogram_sequence).order_by('order').values_list('pictogram_id', flat=True))
+
+            selected_ids = [int(selection['id']) for selection in selections]
+
+            print(correct_sequence)
+            print(selected_ids)
+
+            if selected_ids == correct_sequence:
+                login(request, user)
+                # Redirige al administrador a `admin_dashboard`, y a otros usuarios al `dashboard`
+                if user.is_staff:
+                    return JsonResponse({'success': '/admin_dashboard'})
+                else:
+                    return JsonResponse({'success': '/dashboard'})
+            else:
+                return JsonResponse({'error': 'Selección incorrecta'}, status=400)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Datos inválidos.'}, status=400)
+
+    #Obtenemos 8 pictogramas, 6 aleatorios
+    pictogram_sequence = PictogramSequence.objects.get(person=person)
+    person_pictograms = list(pictogram_sequence.sequence.all())
+
+    all_pictograms = Pictogram.objects.exclude(id__in=[p.id for p in person_pictograms])
+
+    #Seleccionamos 6 aleatorios
+    random_pictograms = random.sample(list(all_pictograms), 4)
+
+    #Combinamos los resultados
+    combined_pictograms = person_pictograms + random_pictograms
+
+    random.shuffle(combined_pictograms)
+
+    return render(request, 'login_pictogram2.html', {'person': person, 'pictograms': combined_pictograms})
 
 
 

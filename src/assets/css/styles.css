@@ -98,6 +98,8 @@ body {
     /* Color de texto original */
 }
 
+
+
 /* Logo */
 .logo {
     max-width: 150px;
@@ -266,18 +268,29 @@ body {
     color: #fff;
 }
 
+/* Contenedor principal que envuelve las tarjetas */
+.user-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos pasen a una nueva fila si no caben */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 10px; /* Espacio entre las tarjetas */
+}
+
 .user-card{
     margin: 10px;
     text-align: center;
     background-color: white;
     border-radius: 10%;
     width: 250px;
-    height: auto;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1 1 calc(33.33% - 20px); /* Ocupa un tercio del ancho menos el espacio entre tarjetas */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
     justify-content: center;
 }
+
 
 .user-image{
     width: 120px;
@@ -303,4 +316,95 @@ body {
 .logo-container {
     margin-bottom: 20px; /* Espacio entre el logo y el formulario */
     text-align: center; /* Centra el logo horizontalmente */
+}
+
+.user-image-login-pictogram{
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--white);
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.user-login-pictogram{
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--my-blue);
+    max-width: 1000px;
+    margin: 20px;
+    font-size: 1.2em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.user-info-pictogram h3{
+    color: white;
+    font-weight: bold;
+    font-size: 1.75em;
+}
+
+.pictogram-container{
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos pasen a una nueva fila si no caben */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 10px; /* Espacio entre las tarjetas */
+    margin-top: 50px;
+}
+
+.pictogram-card{
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 10%; 
+    width: calc(33.33%); /* Ocupa un tercio del ancho menos el espacio entre tarjetas */
+    height: 100px;
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pictogram-image{
+    width: 120px;
+    height: 120px;
+    border-radius: 30%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    margin-top: -40px;
+}
+
+.selected-pictograms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.selected-pictogram {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #ccc;
+    border-radius: 30%;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-selection {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }

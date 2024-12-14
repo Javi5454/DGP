@@ -220,7 +220,6 @@ body {
 .content-container {
     margin-top: 160px;
     padding: 20px;
-    min-height: 5000px;
     width: 100%;
     max-width: 1200px; /* Opcional, establece un máximo */
     margin-left: auto; /* Centra el contenedor horizontalmente */

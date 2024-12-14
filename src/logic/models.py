@@ -29,7 +29,7 @@ class Person(models.Model):
     )
     picture = models.ImageField(upload_to=person_picture_upload_path)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='student')
-    task_types = models.ManyToManyField(TaskType, related_name='persons')
+    task_types = models.ManyToManyField(TaskType, related_name='persons', blank=True)
     
     class Meta:
         ordering = ['user__last_name', 'user__first_name']
