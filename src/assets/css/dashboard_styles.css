@@ -247,6 +247,7 @@ body {
     flex-direction: column; /* Organiza los elementos en columna */
     align-items: center; /* Centra horizontalmente */
     justify-content: space-between; /* Espaciado uniforme */
+    color: var(--my-blue); 
 }
 
 .task-card img {

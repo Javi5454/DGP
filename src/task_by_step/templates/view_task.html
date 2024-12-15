@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Tarea</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/task_by_step_styles.css' %}">
+</head>
+
+<body style="background-color: var(--white);"">
+    {% load crispy_forms_tags %}
+
+    <div class=" container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg custom-card" style="width: 60%;"> <!-- Cambiamos el ancho de la tarjeta -->
+            <div class="card-body text-center">
+                <!-- Logo de la aplicación -->
+                <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+                <h1 class="mb-4 mt-4" style="color: var(--white);">{{task.task_name}}</h1>
+
+                <h2 class="mt-3" style="color: white;">Fecha límite: {{ task.deadline|date:"d/m/Y" }} {{ task.deadline|time:"H:i" }}</h2>
+
+                <!-- Mostrar descripción de texto -->
+                {% if task.task_data.Texto %}
+                <div class="my-4 task-rules">
+                    <h4>Descripción:</h4>
+                    <p>{{ task.task_data.Texto }}</p>
+                </div>
+                {% endif %}
+
+                 <!-- Mostrar archivo de audio -->
+                 {% if task.task_data.Audio %}
+                 <div class="mt-4 mb-4">
+                     <h3>Audio:</h3>
+                     <audio controls>
+                         <source src="{{ task.task_data.Audio }}" type="audio/mpeg">
+                         Tu navegador no soporta audio HTML5.
+                     </audio>
+                 </div>
+                 {% endif %}
+
+                 <!-- Mostrar video -->
+                {% if task.task_data.Vídeo %}
+                <div class="mt-4 mb-4">
+                    <h3 style="color: white;">Video:</h3>
+                    <video width="560" height="315" controls>
+                        <source src="{{ task.task_data.Vídeo }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                      </video> 
+                </div>
+                {% endif %}
+
+                  <!-- Mostrar pictograma -->
+                {% if task.task_data.Pictograma %}
+                <div class="mt-4 mb-4">
+                    <h3 style="color: white;">Pictograma:</h3>
+                    <img src="{{ task.task_data.Pictograma }}" alt="Pictograma" class="img-fluid">
+                </div>
+                {% endif %}
+            
+                {% if task.file_needed %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="upload_file">
+                    <button type="submit">Subir Archivo</button>
+                </form>
+                {% else %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit" name="complete" class="btn btn-primary w-100 custom-btn">Marcar como Completada</button>
+                </form>
+                {% endif %}
+            </div>
+        
+        </div>
+    </div>
+</html>

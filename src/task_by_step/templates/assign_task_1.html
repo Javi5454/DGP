@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Tarea por pasos</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/task_by_step_styles.css' %}">
+</head>
+
+<body class="body-centered">
+    <div class="welcome-container static-container">
+        <!-- Logo de la aplicación -->
+        <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+
+        <h1 class="mt-4">Seleccione un usuario</h1>
+
+        <div class="user-container">
+            {% for person in persons %}
+            <a href="{% url 'task_by_step:assign_task2' username=person.user.username %}" style="text-decoration: none">
+                <div class="p-5 user-card">
+                    <img src="{{person.picture.url}}" alt="{{ person.user.firstname}} {{person.user.lastname}}"
+                        class="user-image">
+                    <div class="user-info">
+                        <h3>{{person.user.last_name}}, {{person.user.first_name}}</h3>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+
+</html>

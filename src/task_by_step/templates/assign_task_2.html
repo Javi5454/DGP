@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Tarea por Pasos</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/task_by_step_styles.css' %}">
+</head>
+
+<body style="background-color: var(--white);">
+    {% load crispy_forms_tags %}
+
+    <!-- Contenedor principal -->
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg custom-card" style="width: 60%;"> <!-- Cambiamos el ancho de la tarjeta -->
+            <div class="card-body text-center">
+                <!-- Logo de la aplicación -->
+                <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
+                <h1 class="mb-4" style="color: var(--white);">Crear Tarea por pasos</h1>
+
+                <!-- Mostrar errores del formulario -->
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <!-- Formulario de creación de tarea -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary w-100 custom-btn">
+                        Asignar Tarea
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</html>

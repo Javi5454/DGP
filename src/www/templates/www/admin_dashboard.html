@@ -22,7 +22,7 @@
             </div>
             <div class="navbar-right">
                 {% if request.user.person.picture %}
-                    <img src="{{ request.user.person.picture.url }}" alt="Foto del usuario" class="user-photo">
+                <img src="{{ request.user.person.picture.url }}" alt="Foto del usuario" class="user-photo">
                 {% endif %}
                 <a href="{% url 'logout' %}" class="btn custom-logout-btn">Logout</a>
             </div>
@@ -37,11 +37,20 @@
                     <h2 class="welcome-message px-3">Bienvenido/a, {{ request.user.get_full_name }}</h2>
                 </div>
             </div>
+            <!-- Mostrar mensajes -->
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
         <div class="container mt-5 text-center vertical-buttons">
             <!-- Botones estilizados con clases predefinidas -->
             <a href="{% url 'home_register' %}" class="btn custom-btn mb-3">Registrar Nuevo Usuario</a>
             <a href="{% url 'tasks:create_dinner_task' %}" class="btn custom-btn mb-3">Asignar Tarea Comanda Comedor</a>
+            <a href="{% url 'task_by_step:assign_task1' %}" class="btn custom-btn mb-3">Asignar Tarea por Pasos</a>
             <a href="{% url 'tasks:manage_menus' %}" class="btn custom-btn mb-3">Gestionar Menús</a>
             <a href="{% url 'tasks:manage_classrooms' %}" class="btn custom-btn mb-3">Gestionar Aulas</a>
         </div>
@@ -49,4 +58,3 @@
 </body>
 
 </html>
-

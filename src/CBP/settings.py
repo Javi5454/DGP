@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'logic.apps.LogicConfig',
     'pictograms.apps.PictogramsConfig',
     'tasks.apps.TasksConfig',
+    'task_by_step.apps.TaskByStepConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'bootstrap5',
@@ -65,11 +66,12 @@ ROOT_URLCONF = 'CBP.urls'
 TEMPLATES_WWW_PATH = os.path.join(BASE_DIR, 'www/templates/www')
 TEMPLATES_PICTOGRAM_PATH = os.path.join(BASE_DIR, 'pictograms/templates/pictograms')
 TEMPLATES_TASKS_PATH = os.path.join(BASE_DIR, 'tasks/templates/tasks')
+TEMPLATES_TASK_BY_STEP_PATH = os.path.join(BASE_DIR, 'task_by_step/templates/task_by_step')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_PICTOGRAM_PATH, TEMPLATES_TASKS_PATH],
+        'DIRS': [TEMPLATES_WWW_PATH, TEMPLATES_PICTOGRAM_PATH, TEMPLATES_TASKS_PATH, TEMPLATES_TASK_BY_STEP_PATH],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,166 @@
+/* Paleta de colores */
+:root {
+    --dark-blue: #047cd7;
+    --light-blue: #98c1d9;
+    --lighter-blue: #e0fbfc;
+    --orange: #de4f2b;
+    --navy: #131c81;
+    --soft-orange: #f7b683;
+    --soft-blue: #9bd0c8;
+    --my-blue: #51abdb;
+    --white: #ffffff;
+}
+
+/* Fondo de la página */
+body {
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    min-height: 100vh;
+    /* Altura completa de la ventana */
+    color: var(--my-blue);
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.body-centered {
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Contenedor de bienvenida como botón */
+.welcome-container {
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--my-blue);
+    max-width: 2000px;
+    margin: 20px;
+    font-size: 1.2em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.welcome-container:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
+}
+
+.static-container {
+    max-width: 2000px;
+    /* Aumenta el ancho máximo */
+    padding: 80px;
+    /* Aumenta el relleno */
+    font-size: 1.5em;
+    /* Tamaño de fuente más grande para el contenido */
+}
+
+.static-container:hover {
+    background-color: var(--my-blue);
+    /* Color de fondo original sin cambio */
+    color: var(--white);
+    /* Color de texto original */
+}
+
+/* Logo */
+.logo {
+    max-width: 150px;
+    /* Tamaño del logo */
+}
+
+/* Contenedor principal que envuelve las tarjetas */
+.user-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos pasen a una nueva fila si no caben */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 10px; /* Espacio entre las tarjetas */
+}
+
+.user-card{
+    margin: 10px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10%;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 calc(33.33% - 10px); /* Ocupa un tercio del ancho menos el espacio entre tarjetas */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+    justify-content: center;
+}
+
+
+.user-image{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--white);
+    margin-bottom: 20px;
+    margin-top: -40px;
+}
+
+.user-info{
+    margin-bottom: -40px;
+}
+
+.user-info h3{
+    margin-top: 10px;
+    color: var(--dark-blue);
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.custom-card {
+    max-width: 1200px; /* Ancho máximo de las tarjetas */
+    text-align: center;
+    background-color: var(--my-blue);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Ajustar los campos del formulario */
+form input,
+form textarea,
+form select {
+    width: 100%; /* Asegura que los campos ocupen todo el ancho disponible */
+    padding: 10px; /* Añade relleno interno para mejorar la apariencia */
+    margin-bottom: 15px; /* Espacio entre campos */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Color del borde */
+}
+
+form label{
+    color: white;
+    font-weight: bold;
+}
+
+.task-rules{
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    color: var(--my-blue);
+}
+
+.task-rules h4{
+    font-weight: bold;
+}
+
+.task-rules p{
+    font-size: x-large;
+}

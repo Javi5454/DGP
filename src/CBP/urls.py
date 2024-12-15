@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('www.urls')),
     path('', include('pictograms.urls')),
     path('', include('tasks.urls')),
+    path('', include('task_by_step.urls')),
 ]
 
 

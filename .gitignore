@@ -172,3 +172,5 @@ migrations/
 
 !.gitignore
 #prueba
+
+completion_files/

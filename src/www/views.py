@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .forms import UserRegistrationForm
 from logic.models import Person
 from tasks.models import DinnerTask
+from task_by_step.models import Task
 
 # Función para verificar si el usuario es un administrador
 def is_admin(user):
@@ -51,8 +52,9 @@ def dashboard(request):
         # Solo procesamos si el rol es 'student'
         if person.role == 'student':
             # Obtén todas las tareas asociadas al estudiante y ordénalas por fecha de creación
-            tasks = DinnerTask.objects.filter(student=person).order_by('assigned_at')  # Orden ascendente
-            return render(request, 'dashboard.html', {'tasks': tasks})
+            dinner_tasks = DinnerTask.objects.filter(student=person, is_completed=False).order_by('assigned_at')  # Orden ascendente
+            tasks = Task.objects.filter(student=person, is_completed=False).order_by('assigned_date')  # Orden ascendente
+            return render(request, 'dashboard.html', {'dinner_tasks': dinner_tasks, 'tasks': tasks})
     
     # Si no es estudiante, redirige o muestra un mensaje
     return render(request, 'error.html', {'message': 'No tienes permisos para acceder a esta página.'})
