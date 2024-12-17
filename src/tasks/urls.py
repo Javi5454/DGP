@@ -15,6 +15,6 @@ urlpatterns = [
     path('manage_classrooms/', views.manage_classrooms, name='manage_classrooms'),
     path('classrooms/edit/<int:classroom_id>/', views.edit_classroom, name='edit_classroom'),
     path('classrooms/delete/<int:classroom_id>/', views.delete_classroom, name='delete_classroom'),
-    path('dinner_task1/', views.dinner_task1, name='dinner_task1'),
+    path('dinner_task1/<int:dinnerTask_id>/', views.dinner_task1, name='dinner_task1'),
     path('dinner_task2/<int:classroom_id>/', views.dinner_task2, name='dinner_task2'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

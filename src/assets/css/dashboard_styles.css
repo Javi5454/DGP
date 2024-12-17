@@ -224,7 +224,7 @@ body {
     max-width: 1200px; /* Opcional, establece un máximo */
     margin-left: auto; /* Centra el contenedor horizontalmente */
     margin-right: auto; /* Centra el contenedor horizontalmente */
-    border: 2px solid red; /* Solo para depuración */
+    /*border: 2px solid red; /* Solo para depuración */
 }
 
 

@@ -24,7 +24,7 @@ body {
 }
 
 .custom-card {
-    max-width: 300px; /* Ancho máximo de las tarjetas */
+    max-width: 1000px; /* Ancho máximo de las tarjetas */
     text-align: center;
     background-color: var(--my-blue);
     padding: 15px;
