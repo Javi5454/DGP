@@ -17,8 +17,8 @@
     </div>
 
     <div class="container mt-5 content-area">
-        <h1 class="text-center mb-4">Menús</h1>
-        <form method="POST" action="{% url 'save_classroom_order' classroom.id %}">
+        <h1 class="text-center mb-4"><strong>MENÚS</strong></h1>
+        <form method="POST" action="">
             {% csrf_token %}
             <div class="row justify-content-center">
                 {% for menu in menus %}
@@ -27,11 +27,13 @@
                         <img src="{{ menu.image.url }}" alt="{{ menu.description }}" class="card-img-top">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ menu.description }}</h5>
-                            <!-- Contador -->
+                            <!-- Contador con fondo blanco -->
                             <div class="counter-container">
                                 <button type="button" class="counter-button btn-minus" onclick="updateCounter(this, -1)">-</button>
                                 <span class="counter-display">0</span>
                                 <button type="button" class="counter-button btn-plus" onclick="updateCounter(this, 1)">+</button>
+                                <!-- Imagen debajo del contador -->
+                                <img src="{% static 'numbers/0.png' %}" alt="Número" class="counter-image">
                             </div>
                             <input type="hidden" name="menu_{{ menu.id }}" value="0">
                         </div>
@@ -51,11 +53,18 @@
         function updateCounter(button, change) {
             const counterContainer = button.parentElement;
             const display = counterContainer.querySelector('.counter-display');
-            const hiddenInput = counterContainer.parentElement.querySelector('input[type="hidden"]');
+            const hiddenInput = counterContainer.parentElement.parentElement.querySelector('input[type="hidden"]');
+            const image = counterContainer.querySelector('.counter-image');
+
             let count = parseInt(display.textContent) + change;
             if (count < 0) count = 0;  // Evita negativos
-            display.textContent = count;
-            hiddenInput.value = count;
+            if (count > 10) count = 10;  // Límite máximo en 15
+
+            display.textContent = count;  // Actualiza el número en el contador
+            hiddenInput.value = count;    // Actualiza el valor en el input oculto
+
+            // Actualiza la imagen
+            image.src = `/static/numbers/${count}.png`;
         }
     </script>
 </body>

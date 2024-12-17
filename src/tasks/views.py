@@ -50,18 +50,20 @@ def create_dinner_task(request):
 # COMANDA
 def dinner_task1(request, dinnerTask_id):
     classrooms = Classroom.objects.all()
-    task = get_object_or_404(DinnerTask, id=dinnerTask_id)
-    return render(request, 'dinner_task1.html', {'dinnerTask_id': task, 'classrooms': classrooms})
-
+    request.session['taskID']=dinnerTask_id
+    return render(request, 'dinner_task1.html', {'classrooms': classrooms})
 
 def dinner_task2(request, classroom_id):
     classroom = get_object_or_404(Classroom, pk=classroom_id)
+    taskID = request.session['taskID']
+    tarea = get_object_or_404(DinnerTask, pk=taskID)
     menus = Menu.objects.all()
 
     if request.method == "POST":
-        # Crear ClassroomOrder
+        # Crear ClassroomOrder para el aula
         classroom_order = ClassroomOrder.objects.create(classroom=classroom)
 
+        # Recorrer los datos del formulario
         for key, value in request.POST.items():
             if key.startswith("menu_"):
                 menu_id = key.split("_")[1]
@@ -71,15 +73,17 @@ def dinner_task2(request, classroom_id):
                     menu_order = MenuOrder.objects.create(menu=menu, quantity=quantity)
                     classroom_order.menu_orders.add(menu_order)
 
-        # Crear una colección con fecha actual
-        collection, created = ClassroomOrderCollection.objects.get_or_create(date=timezone.now())
+        # Crear una colección asociada a la tarea
+        collection, created = ClassroomOrderCollection.objects.get_or_create(task=tarea)
         collection.classroom_orders.add(classroom_order)
 
-        return redirect('menu_selection_view', classroom_id=classroom_id)
+        # Redirigir a dinner_task1 después de guardar
+        return redirect('tasks:dinner_task1', dinnerTask_id=taskID)
 
     return render(request, 'dinner_task2.html', {
         'classroom': classroom,
         'menus': menus,
+        'taskid': taskID
     })
 
 ##########

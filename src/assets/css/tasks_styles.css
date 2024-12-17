@@ -202,15 +202,6 @@ body {
     border-top: 1px solid #ddd;
 }
 
-/* Botones de incremento/decremento */
-.counter-button {
-    border: none;
-    font-size: 1.5rem;
-    padding: 5px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-}
 
 /* Botón de restar */
 .btn-minus {
@@ -224,12 +215,7 @@ body {
     color: white;
 }
 
-/* Contador de cantidad */
-.counter-display {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-}
+
 
 /* Botón de guardar */
 .save-button {
@@ -285,4 +271,57 @@ body {
     margin: 0 auto;
     max-width: 1200px;
     margin-top: 130px;
+}
+
+.counter-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff; /* Fondo blanco */
+    border: 1px solid #ddd; /* Borde suave */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.counter-button {
+    border: none;
+    font-size: 1.5rem;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+.counter-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+
+.confirm-button {
+    display: block;
+    margin: 30px auto;
+    text-align: center;
+    font-size: 2rem;
+    padding: 10px 20px;
+    background-color: var(--dark-blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.confirm-button:hover {
+    background-color: var(--navy);
+    color: white;
+}
+
+.counter-image {
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
 }
