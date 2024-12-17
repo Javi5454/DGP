@@ -9,7 +9,7 @@ class UserRegistrationForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, label="Nombre")
     last_name = forms.CharField(max_length=30, label="Apellidos")
     role = forms.ChoiceField(choices=Person.ROLE_CHOICES, label="Tipo de Usuario")
-    task_types = forms.ModelMultipleChoiceField(queryset=TaskType.objects.all(), widget=forms.CheckboxSelectMultiple, label="Tipos de Tareas")
+    task_types = forms.ModelMultipleChoiceField(queryset=TaskType.objects.all(), widget=forms.CheckboxSelectMultiple, label="Tipos de Tareas", required=False)
     profile_picture = forms.ImageField(label="Foto de Perfil", required=True)
 
     class Meta:

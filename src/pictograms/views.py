@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Person, Pictogram, PictogramSequence, PictogramOrder
+from tasks.models import TaskType
 from .forms import UserRegistrationForm, PictogramPasswordForm
 from django.core.files.storage import default_storage
 from django.core.files.base import File
@@ -112,14 +113,18 @@ def register_pictogram1(request):
             last_name = form.cleaned_data['last_name']
             profile_picture = form.cleaned_data['profile_picture']
             username = form.cleaned_data['username']
+            role = form.cleaned_data['role']
+            password = form.cleaned_data['password']
 
             #Guardamos los datos de la sesion
             request.session['first_name'] = first_name
             request.session['last_name'] = last_name
             request.session['username'] = username
+            request.session['password'] = username
+            request.session['role'] = role
 
-            request.session['task_types'] = form.cleaned_data['task_types']
-
+            request.session['task_types'] = list(form.cleaned_data['task_types'].values_list('id', flat=True))
+            print(request.session['task_types'])
             #Guardamos la imagen temporalmente
             file_name = default_storage.save(f"temp/{profile_picture.name}", profile_picture)
             request.session['temp_profile_picture'] = file_name
@@ -149,12 +154,16 @@ def register_pictogram2(request):
                 username=username,
                 first_name=request.session['first_name'],
                 last_name=request.session['last_name'],
-                password="password123"  # Esta es una contraseña por defecto; puedes cambiarla si lo prefieres
+                password=request.session['password'],  # Esta es una contraseña por defecto; puedes cambiarla si lo prefieres
             )
 
             #Recuperamos la iamgen temporal desde el almacenamiento
             temp_file_path = request.session.get('temp_profile_picture')
-            print(request.session['task_types'])
+            
+            #Recuperamos los tasktype
+            task_types_id = request.session['task_types']
+            task_types = TaskType.objects.filter(id__in=task_types_id)
+
             with default_storage.open(temp_file_path,'rb') as temp_file:
                 profile_picture = File(temp_file)
 
@@ -162,7 +171,10 @@ def register_pictogram2(request):
                 person = Person.objects.create(
                     user=user,
                     picture=profile_picture,
+                    role=request.session['role'],
                 )
+
+                person.task_types.set(task_types),
 
                 #Limpiar la imagen temporal anterior si existe
                 if temp_file_path:

@@ -89,11 +89,13 @@ def register(request):
                 user.save()  # Guardar cambios en el usuario
 
             # Crear el perfil de persona asociado al usuario
-            Person.objects.create(
+            person = Person.objects.create(
                 user=user,
                 role=form.cleaned_data['role'],  # Tomar el rol del formulario
-                picture=form.cleaned_data['picture']  # Guardar la foto de perfil subida
+                picture=form.cleaned_data['profile_picture']  # Guardar la foto de perfil subida
             )
+
+            person.task_types.set(form.cleaned_data['task_types'])
 
             # Mensaje de éxito y redirigir
             messages.success(request, "Usuario registrado exitosamente.")
