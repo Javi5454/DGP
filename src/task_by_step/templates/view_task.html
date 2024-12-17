@@ -16,7 +16,7 @@
     {% load crispy_forms_tags %}
 
     <div class=" container d-flex justify-content-center align-items-center vh-100">
-        <div class="card shadow-lg custom-card" style="width: 60%;"> <!-- Cambiamos el ancho de la tarjeta -->
+        <div class="card shadow-lg custom-card" style="width: 80%;"> <!-- Cambiamos el ancho de la tarjeta -->
             <div class="card-body text-center">
                 <!-- Logo de la aplicación -->
                 <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="logo">
@@ -57,7 +57,7 @@
                   <!-- Mostrar pictograma -->
                 {% if task.task_data.Pictograma %}
                 <div class="mt-4 mb-4">
-                    <h3 style="color: white;">Pictograma:</h3>
+                    <h3 style="color: white; max-height: 150px;">Pictograma:</h3>
                     <img src="{{ task.task_data.Pictograma }}" alt="Pictograma" class="img-fluid">
                 </div>
                 {% endif %}
@@ -65,8 +65,8 @@
                 {% if task.file_needed %}
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input type="file" name="upload_file">
-                    <button type="submit">Subir Archivo</button>
+                    <input type="file" name="upload_file" style="color: white;">
+                    <button type="submit" class="btn btn-primary w-100 custom-btn">Subir Archivo</button>
                 </form>
                 {% else %}
                 <form method="post" enctype="multipart/form-data">

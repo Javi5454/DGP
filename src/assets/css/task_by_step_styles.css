@@ -164,3 +164,29 @@ form label{
 .task-rules p{
     font-size: x-large;
 }
+
+.image-preview {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    border: 2px solid var(--dark-blue);
+    background-color: var(--white);
+    object-fit: cover;
+    display: none; /* Oculta la imagen hasta que se cargue */
+    margin-bottom: 10px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.custom-btn {
+    background-color: var(--dark-blue);
+    color: #ffffff;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 5px;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

@@ -31,17 +31,27 @@ class DynamicTaskForm(forms.Form):
             elif task_type.name == 'Vídeo':
                 self.fields['Vídeo'] = forms.FileField(
                     label="Subir archivo de vídeo",
-                    required=True
+                    required=True,
+                    widget=forms.ClearableFileInput(attrs={
+                        'style': 'color:white;'
+                    })
                 )
             elif task_type.name == 'Pictograma':
                 self.fields['Pictograma'] = forms.ImageField(
                     label="Subir pictograma",
-                    required=True
+                    required=True,
+                    widget=forms.ClearableFileInput(attrs={
+                        'style': 'color:white;',
+                        'id':'pictogramPictureUpdate'
+                    })
                 )
             elif task_type.name == 'Audio':
                 self.fields['Audio'] = forms.FileField(
                     label="Subir archivo de audio",
-                    required=True
+                    required=True,
+                    widget=forms.ClearableFileInput(attrs={
+                        'style': 'color: white;'
+                    })
                 )
     
     #Verificamos que la deadline es posterior
