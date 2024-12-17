@@ -1,7 +1,7 @@
 from django.db import models
 import os
 from django.conf import settings
-
+from django.utils import timezone
 
 ############
 # DINNERTASK
@@ -92,3 +92,30 @@ class TaskType(models.Model):
 
     def __str__(self):
         return self.name   
+    
+
+##########################
+# REGISTRAR LA COMANDA
+
+class MenuOrder(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name="menu_orders")
+    quantity = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.menu.description} - Cantidad: {self.quantity}"
+
+
+class ClassroomOrder(models.Model):
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, related_name="classroom_orders")
+    menu_orders = models.ManyToManyField(MenuOrder, related_name="classroom_orders")
+
+    def __str__(self):
+        return f"Comanda del aula: {self.classroom.description}"
+    
+
+class ClassroomOrderCollection(models.Model):
+    date = models.DateField(default=timezone.now)  # Fecha de la colección
+    classroom_orders = models.ManyToManyField(ClassroomOrder, related_name="collections")
+
+    def __str__(self):
+        return f"Colección de comandas - Fecha: {self.date}"

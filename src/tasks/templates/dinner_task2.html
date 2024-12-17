@@ -11,30 +11,52 @@
     <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
 </head>
 <body>
-    <!-- Imagen fija y descripción del aula -->
     <div class="fixed-classroom-info">
         <img src="{{ classroom.image.url }}" alt="{{ classroom.description }}">
-        <h3 class="text-center"><strong>{{ classroom.description }}</strong></h3>
+        <h3>{{ classroom.description }}</h3>
     </div>
 
-    <!-- Contenido desplazable -->
-    <div class="container-fluid mt-5 content-area">
-        <h1 class="text-center mb-4"><strong>Menús</strong></h1>
-        <div class="row justify-content-center">
-            {% for menu in menus %}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
-                <div class="card custom-card">
-                    <img src="{{ menu.image.url }}" alt="Imagen de {{ menu.description }}" class="card-img-top image-preview2">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ menu.description }}</h5> <!-- Aquí se muestra la descripción -->
+    <div class="container mt-5 content-area">
+        <h1 class="text-center mb-4">Menús</h1>
+        <form method="POST" action="{% url 'save_classroom_order' classroom.id %}">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                {% for menu in menus %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
+                    <div class="card custom-card">
+                        <img src="{{ menu.image.url }}" alt="{{ menu.description }}" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ menu.description }}</h5>
+                            <!-- Contador -->
+                            <div class="counter-container">
+                                <button type="button" class="counter-button btn-minus" onclick="updateCounter(this, -1)">-</button>
+                                <span class="counter-display">0</span>
+                                <button type="button" class="counter-button btn-plus" onclick="updateCounter(this, 1)">+</button>
+                            </div>
+                            <input type="hidden" name="menu_{{ menu.id }}" value="0">
+                        </div>
                     </div>
                 </div>
+                {% empty %}
+                <p class="text-center">No hay menús disponibles.</p>
+                {% endfor %}
             </div>
-            {% empty %}
-            <p class="text-center">No hay menús disponibles.</p>
-            {% endfor %}
-        </div>
+            <div class="text-center">
+                <button type="submit" class="save-button">Guardar</button>
+            </div>
+        </form>
     </div>
-    
+
+    <script>
+        function updateCounter(button, change) {
+            const counterContainer = button.parentElement;
+            const display = counterContainer.querySelector('.counter-display');
+            const hiddenInput = counterContainer.parentElement.querySelector('input[type="hidden"]');
+            let count = parseInt(display.textContent) + change;
+            if (count < 0) count = 0;  // Evita negativos
+            display.textContent = count;
+            hiddenInput.value = count;
+        }
+    </script>
 </body>
 </html>
