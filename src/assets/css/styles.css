@@ -373,6 +373,22 @@ body {
     justify-content: center;
 }
 
+.pictogram-card2 {
+    width: 150px; /* Ajusta el ancho del contenedor */
+    height: 150px; /* Ajusta la altura del contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ddd; /* Opcional: bordes para visualizar mejor el tamaño */
+    border-radius: 8px; /* Opcional: bordes redondeados */
+    margin: 10px;
+    transition: transform 0.3s; /* Animación opcional */
+}
+
+.pictogram-card2:hover {
+    transform: scale(1.1); /* Efecto de escala al pasar el mouse */
+}
+
 .pictogram-image{
     width: 120px;
     height: 120px;
@@ -380,6 +396,12 @@ body {
     object-fit: cover;
     margin-bottom: 20px;
     margin-top: -40px;
+}
+
+.pictogram-image2 {
+    max-width: 100%; /* Garantiza que la imagen se ajuste al contenedor */
+    max-height: 100%;
+    object-fit: contain; /* Mantiene la proporción de la imagen */
 }
 
 .selected-pictograms {

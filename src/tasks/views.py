@@ -48,9 +48,10 @@ def create_dinner_task(request):
 
 ###############
 # COMANDA
-def dinner_task1(request):
+def dinner_task1(request, dinnerTask_id):
     classrooms = Classroom.objects.all()
-    return render(request, 'dinner_task1.html', {'classrooms': classrooms})
+    task = get_object_or_404(DinnerTask, id=dinnerTask_id)
+    return render(request, 'dinner_task1.html', {'dinnerTask_id': task, 'classrooms': classrooms})
 
 
 def dinner_task2(request, classroom_id):

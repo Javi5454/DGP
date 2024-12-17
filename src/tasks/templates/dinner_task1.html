@@ -17,7 +17,7 @@
         <div class="row justify-content-center">
             {% for classroom in classrooms %}
             <div class="col-md-4 mb-3">
-                <a href="{% url 'dinner_task2' classroom.id %}" class="btn custom-btn4 w-100">
+                <a href="{% url 'tasks:dinner_task2' classroom_id=classroom.id %}" class="btn custom-btn4 w-100">
                     <div class="text-center">
                         <img src="{{ classroom.image.url }}" class="image-preview2 mb-2">
                         <p><strong>{{ classroom.description }}</strong></p>
@@ -29,3 +29,4 @@
     </div>
 </body>
 </html>
+

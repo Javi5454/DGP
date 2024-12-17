@@ -62,12 +62,14 @@
                 {% endif %}
         </div>
 
+
+
         <div class="container-fluid mt-5">
             <h3 style="font-weight: bold;">Tareas Comedor</h3>
                 <!-- Mostrar tareas asignadas si existen -->
                     {% if dinner_tasks %}
                         {% for task in dinner_tasks %} 
-                        <a href="#", style="text-decoration: none;">
+                        <a href="{% url 'tasks:dinner_task1' dinnerTask_id=task.id %}", style="text-decoration: none;">
                         <div class="row mt-4 g-0"> <!-- Reduce el espaciado con g-2 -->
                             <div class="col-12">
                                 <div class="task-card py-2 text-center"> <!-- Reduce padding -->
