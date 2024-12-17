@@ -69,8 +69,6 @@ def login_pictogram2(request, username):
 
             selected_ids = [int(selection['id']) for selection in selections]
 
-            print(correct_sequence)
-            print(selected_ids)
 
             if selected_ids == correct_sequence:
                 login(request, user)
@@ -113,10 +111,14 @@ def register_pictogram1(request):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             profile_picture = form.cleaned_data['profile_picture']
+            username = form.cleaned_data['username']
 
             #Guardamos los datos de la sesion
             request.session['first_name'] = first_name
             request.session['last_name'] = last_name
+            request.session['username'] = username
+
+            request.session['task_types'] = form.cleaned_data['task_types']
 
             #Guardamos la imagen temporalmente
             file_name = default_storage.save(f"temp/{profile_picture.name}", profile_picture)
@@ -142,7 +144,7 @@ def register_pictogram2(request):
                 return redirect('register_pictogram2')
 
             # Crear el usuario
-            username = f"{request.session['first_name'].lower()}.{request.session['last_name'].lower()}"
+            username = f"{request.session['username']}"
             user = User.objects.create_user(
                 username=username,
                 first_name=request.session['first_name'],
@@ -152,6 +154,7 @@ def register_pictogram2(request):
 
             #Recuperamos la iamgen temporal desde el almacenamiento
             temp_file_path = request.session.get('temp_profile_picture')
+            print(request.session['task_types'])
             with default_storage.open(temp_file_path,'rb') as temp_file:
                 profile_picture = File(temp_file)
 
