@@ -10,6 +10,7 @@
     {% bootstrap_javascript %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
 </head>
 
 <body style="background-color: var(--white);">
@@ -17,10 +18,10 @@
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg custom-card" style="width: 60%;">
             <div class="card-body custom-card">
-                <h1 class="text-center mb-4">Editar Aula</h1>
+                <h1 class="text-center mb-4" style="color: white;">Editar Aula</h1>
 
                 <!-- Formulario para editar menú -->
-                <form method="POST" enctype="multipart/form-data" action="{% url 'edit_classroom' classroom_id=classroom.id %}">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'tasks:edit_classroom' classroom_id=classroom.id %}">
                     {% csrf_token %}
                     <!-- Mostrar imagen actual -->
                     <div class="mb-3 text-center">
@@ -53,7 +54,7 @@
                 </form>
 
                 <!-- Botón para volver -->
-                <a href="{% url 'manage_classrooms' %}" class="btn w-100 mt-3 custom-btn3">Volver</a>
+                <a href="{% url 'tasks:manage_classrooms' %}" class="btn w-100 mt-3 custom-btn3">Volver</a>
             </div>
         </div>
     </div>

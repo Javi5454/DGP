@@ -100,7 +100,7 @@ def manage_menus(request):
                 menu.image = form.cleaned_data['image']
 
             menu.save()
-            return redirect('manage_menus')
+            return redirect('tasks:manage_menus')
     else:
         form = MenuForm()
 
@@ -128,7 +128,7 @@ def edit_menu(request, menu_id):
             old_menu.delete()
 
             # Redirige a la página de gestión de menús
-            return redirect('manage_menus')
+            return redirect('tasks:manage_menus')
     else:
         # Prellenar el formulario con los datos del menú actual
         form = MenuForm(instance=old_menu)
@@ -139,7 +139,7 @@ def edit_menu(request, menu_id):
 def delete_menu(request, menu_id):
     menu = get_object_or_404(Menu, id=menu_id)
     menu.delete()
-    return redirect('manage_menus')
+    return redirect('tasks:manage_menus')
 
 
 ###################
@@ -156,7 +156,7 @@ def manage_classrooms(request):
                 classroom.image = form.cleaned_data['image']
 
             classroom.save()
-            return redirect('manage_classrooms')
+            return redirect('tasks:manage_classrooms')
     else:
         form = ClassroomForm()
 
@@ -184,7 +184,7 @@ def edit_classroom(request, classroom_id):
             old_classroom.delete()
 
             # Redirige a la página de gestión de aulas
-            return redirect('manage_classrooms')
+            return redirect('tasks:manage_classrooms')
     else:
         # Prellenar el formulario con los datos del aula actual
         form = ClassroomForm(instance=old_classroom)
@@ -195,5 +195,5 @@ def edit_classroom(request, classroom_id):
 def delete_classroom(request, classroom_id):
     classroom = get_object_or_404(Classroom, id=classroom_id)
     classroom.delete()
-    return redirect('manage_classrooms')
+    return redirect('tasks:manage_classrooms')
 

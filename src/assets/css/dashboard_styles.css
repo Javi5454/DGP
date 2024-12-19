@@ -271,3 +271,20 @@ body {
     margin-top: 15px;
 }
 
+.back-link {
+    position: absolute; /* Posiciona el elemento de manera absoluta */
+    bottom: 20px; /* Ubica el enlace a 10px del borde inferior */
+    left: 30px; /* Ubica el enlace a 10px del borde izquierdo */
+    font-size: 3em; /* Aumenta el tamaño del texto y del ícono */
+    text-decoration: none; /* Elimina el subrayado */
+    color: white; /* Mantiene el color del texto según el tema */
+    background-color: var(--dark-blue);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.back-link:hover {
+    color: white; /* Cambia el color al pasar el cursor (opcional) */
+    background-color: var(--navy);
+    transition: 0.3s;
+}

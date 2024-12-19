@@ -10,6 +10,7 @@
     {% bootstrap_javascript %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
 </head>
 
 <body style="background-color: var(--white);">
@@ -64,8 +65,8 @@
                             </td> 
                             <!-- Muestra los botones centrados -->
                             <td class="text-center align-middle">
-                                <a href="{% url 'edit_menu' menu.id %}" class="btn custom-btn2 btn-sm ">Editar</a>
-                                <a href="{% url 'delete_menu' menu.id %}" class="btn btn-danger btn-sm" 
+                                <a href="{% url 'tasks:edit_menu' menu.id %}" class="btn custom-btn2 btn-sm ">Editar</a>
+                                <a href="{% url 'tasks:delete_menu' menu.id %}" class="btn btn-danger btn-sm" 
                                    onclick="return confirm('¿Estás seguro de eliminar este menú?');">Eliminar</a>
                             </td>
                         </tr>
@@ -76,6 +77,10 @@
             </div>
         </div>
     </div>
+
+    <a href="{% url 'admin_dashboard' %}" class="back-link">
+        <span><i class="fa-solid fa-left-long"></i> VOLVER</span>
+    </a>
 
     <script>
         const profilePictureInput = document.getElementById("image");

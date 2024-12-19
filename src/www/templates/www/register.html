@@ -25,12 +25,13 @@
             margin: 0 auto; /* Centra la imagen horizontalmente */
         }
     </style>
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
 </head>
 <body class="body-centered body-centered-register">
     <!-- Botón REGISTRO CON PICTOGRAMAS -->
     <a href="{% url 'register_pictogram1' %}" class="pictogramas-button">
         <span>REGISTRO CON PICTOGRAMAS</span>
-        <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de la app" class="button-image">
+        <img src="{% static 'images/registro_pictograma.png' %}" alt="Logo de la app" class="button-image">
     </a>
 
     <div class="welcome-container no-hover-effect register-container">
@@ -62,6 +63,10 @@
             <button type="submit" class="btn btn-login-admin btn-block mt-3 btn-register">CONFIRMAR</button>
         </form>
     </div>
+
+    <a href="{% url 'home_register' %}" class="back-link">
+        <span><i class="fa-solid fa-left-long"></i> VOLVER</span>
+    </a>
 
     <script>
         const profilePictureInput = document.getElementById("id_profile_picture");

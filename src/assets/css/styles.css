@@ -430,3 +430,44 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.welcome-container-home{
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--my-blue);
+    max-width: 700px;
+    margin: 20px;
+    font-size: 1.2em;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.welcome-container-home:hover {
+    background-color: var(--dark-blue);
+    color: #fff;
+}
+
+.back-link {
+    position: absolute; /* Posiciona el elemento de manera absoluta */
+    bottom: 20px; /* Ubica el enlace a 10px del borde inferior */
+    left: 30px; /* Ubica el enlace a 10px del borde izquierdo */
+    font-size: 3em; /* Aumenta el tamaño del texto y del ícono */
+    text-decoration: none; /* Elimina el subrayado */
+    color: white; /* Mantiene el color del texto según el tema */
+    background-color: var(--dark-blue);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.back-link:hover {
+    color: white; /* Cambia el color al pasar el cursor (opcional) */
+    background-color: var(--navy);
+    transition: 0.3s;
+}

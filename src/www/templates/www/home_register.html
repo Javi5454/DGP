@@ -11,6 +11,7 @@
     <!-- Archivo CSS personalizado -->
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 
@@ -21,15 +22,15 @@
     <div class="container-fluid">
         <div class="row justify-content-center flex-row-reverse">
             <!-- Contenedor para el registro con pictogramas -->
-            <a href="{% url 'register_pictogram1' %}" class="welcome-container welcome-container-register col-sm-6">
+            <a href="{% url 'register_pictogram1' %}" class="welcome-container-home welcome-container-register col-sm-6">
                 <h2 class="welcome-title">REGISTRO CON PICTOGRAMAS</h2>
                 <div class="text-center">
-                    <img src="{% static 'images/app_logo.jpeg' %}" alt="Logo de registro adaptado" class="logo logo-large mx-auto d-block">
+                    <img src="{% static 'images/registro_pictograma.png' %}" alt="Logo de registro adaptado" class="logo logo-large mx-auto d-block">
                 </div>
             </a>
 
             <!-- Contenedor para el registro alfanumérico -->
-            <a href="{% url 'register' %}" class="welcome-container welcome-container-register col-sm-6">
+            <a href="{% url 'register' %}" class="welcome-container-home welcome-container-register col-sm-6">
                 <h2 class="welcome-title">REGISTRO ALFANUMÉRICO</h2>
                 <div class="text-center">
                     <img src="{% static 'images/register_alfanum.png' %}" alt="Logo de registro clásico" class="logo logo-large mx-auto d-block">
@@ -37,5 +38,9 @@
             </a>
         </div>
     </div>
+
+    <a href="{% url 'admin_dashboard' %}" class="back-link">
+        <span><i class="fa-solid fa-left-long"></i> VOLVER</span>
+    </a>
 </body>
 </html>

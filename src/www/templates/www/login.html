@@ -9,6 +9,7 @@
     {% bootstrap_javascript %}
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body class="body-centered">
@@ -43,5 +44,9 @@
             <button type="submit" class="btn btn-login-admin btn-block mt-3">INICIAR SESIÓN</button>
         </form>
     </div>
+
+    <a href="/" class="back-link">
+        <span><i class="fa-solid fa-left-long"></i> VOLVER</span>
+    </a>
 </body>
 </html>

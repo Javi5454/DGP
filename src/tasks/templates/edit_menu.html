@@ -17,10 +17,10 @@
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg custom-card" style="width: 60%;">
             <div class="card-body custom-card">
-                <h1 class="text-center mb-4">Editar Menú</h1>
+                <h1 class="text-center mb-4" style="color: white;">Editar Menú</h1>
 
                 <!-- Formulario para editar menú -->
-                <form method="POST" enctype="multipart/form-data" action="{% url 'edit_menu' menu_id=menu.id %}">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'tasks:edit_menu' menu_id=menu.id %}">
                     {% csrf_token %}
                     <!-- Mostrar imagen actual -->
                     <div class="mb-3 text-center">
@@ -53,7 +53,7 @@
                 </form>
 
                 <!-- Botón para volver -->
-                <a href="{% url 'manage_menus' %}" class="btn w-100 mt-3 custom-btn3">Volver</a>
+                <a href="{% url 'tasks:manage_menus' %}" class="btn w-100 mt-3 custom-btn3">Volver</a>
             </div>
         </div>
     </div>

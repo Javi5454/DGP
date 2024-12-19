@@ -9,6 +9,7 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     {% load static %}
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
@@ -39,6 +40,10 @@
             {% endfor %}
         </div>
     </div>
+
+    <a href="/" class="back-link">
+        <span><i class="fa-solid fa-left-long"></i> VOLVER</span>
+    </a>
     
 </body>
 

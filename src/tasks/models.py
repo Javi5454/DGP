@@ -55,7 +55,7 @@ class Menu(models.Model):
 # CLASSROOM
 class Classroom(models.Model):
     description = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='pictogramas/', null=True, blank=True)  # Guardará las imágenes en la carpeta /media/pictogramas
+    image = models.ImageField(upload_to='aulas/', null=True, blank=True)  # Guardará las imágenes en la carpeta /media/pictogramas
 
     def save(self, *args, **kwargs):
     # Si el aula ya existe (es una edición) y tiene una imagen anterior
