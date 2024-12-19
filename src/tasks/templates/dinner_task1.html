@@ -14,9 +14,9 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-4 custom-title"><strong>¿EN QUÉ AULA ESTÁS?</strong></h1>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center gx-3 gy-3">
             {% for classroom in classrooms %}
-            <div class="col-md-4 mb-3">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
                 <a href="{% url 'tasks:dinner_task2' classroom_id=classroom.id %}" class="btn custom-btn4 w-100">
                     <div class="text-center">
                         <img src="{{ classroom.image.url }}" class="image-preview2 mb-2">
@@ -26,7 +26,9 @@
             </div>
             {% endfor %}
         </div>
+        <!-- Botón Confirmar -->
+        <div class="text-center">
+            <a href="{% url 'dashboard' %}" class="confirm-button">Confirmar</a>
+        </div>
     </div>
 </body>
-</html>
-

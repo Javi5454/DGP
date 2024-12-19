@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
-from .models import DinnerTask, Menu, Classroom
+from .models import DinnerTask, Menu, Classroom, MenuOrder, ClassroomOrder, ClassroomOrderCollection
 from .forms import DinnerTaskForm, MenuForm, ClassroomForm
 import os
 from django.conf import settings
 from django.core.files.base import ContentFile
+from django.utils import timezone
+from django.contrib import messages
 
 # Create your views here.
 
@@ -37,7 +39,8 @@ def create_dinner_task(request):
         form = DinnerTaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('dinner_task_list')
+            messages.success(request, 'Tarea comanda comedor asignada correctamente.')
+            return redirect('admin_dashboard')
     else:
         form = DinnerTaskForm()
     return render(request, 'create_dinner_task.html', {'form':form})
@@ -47,13 +50,42 @@ def create_dinner_task(request):
 # COMANDA
 def dinner_task1(request, dinnerTask_id):
     classrooms = Classroom.objects.all()
-    task = get_object_or_404(DinnerTask, id=dinnerTask_id)
-    return render(request, 'dinner_task1.html', {'dinnerTask_id': task, 'classrooms': classrooms})
+    request.session['taskID']=dinnerTask_id
+    return render(request, 'dinner_task1.html', {'classrooms': classrooms})
 
 def dinner_task2(request, classroom_id):
-    classroom = get_object_or_404(Classroom, id=classroom_id)
-    menus = Menu.objects.all()  # Verifica que este queryset contenga menús válidos
-    return render(request, 'dinner_task2.html', {'classroom': classroom, 'menus': menus})
+    classroom = get_object_or_404(Classroom, pk=classroom_id)
+    taskID = request.session['taskID']
+    tarea = get_object_or_404(DinnerTask, pk=taskID)
+    menus = Menu.objects.all()
+
+    if request.method == "POST":
+        # Crear ClassroomOrder para el aula
+        classroom_order = ClassroomOrder.objects.create(classroom=classroom)
+
+        # Recorrer los datos del formulario
+        for key, value in request.POST.items():
+            if key.startswith("menu_"):
+                menu_id = key.split("_")[1]
+                quantity = int(value)
+                if quantity > 0:
+                    menu = get_object_or_404(Menu, pk=menu_id)
+                    menu_order = MenuOrder.objects.create(menu=menu, quantity=quantity)
+                    classroom_order.menu_orders.add(menu_order)
+
+        # Crear una colección asociada a la tarea
+        collection, created = ClassroomOrderCollection.objects.get_or_create(task=tarea)
+        collection.classroom_orders.add(classroom_order)
+
+        # Redirigir a dinner_task1 después de guardar
+        return redirect('tasks:dinner_task1', dinnerTask_id=taskID)
+
+    return render(request, 'dinner_task2.html', {
+        'classroom': classroom,
+        'menus': menus,
+        'taskid': taskID
+    })
+
 ##########
 # MENU
 @user_passes_test(is_admin)
@@ -164,3 +196,4 @@ def delete_classroom(request, classroom_id):
     classroom = get_object_or_404(Classroom, id=classroom_id)
     classroom.delete()
     return redirect('manage_classrooms')
+

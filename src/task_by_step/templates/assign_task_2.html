@@ -39,7 +39,18 @@
                 <!-- Formulario de creación de tarea -->
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {% for field in form %}
+                    <div>
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if "Pictograma" in field.name %}
+                        <!-- Área de previsualización asociada al campo -->
+                        <div class="preview-container">
+                            <img id="image-preview" class="image-preview" alt="Vista previa de la imagen">
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
                     <button type="submit" class="btn btn-primary w-100 custom-btn">
                         Asignar Tarea
                     </button>
@@ -47,5 +58,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const profilePictureInput = document.getElementById("pictogramPictureUpdate");
+        const imagePreview = document.getElementById("image-preview");
+
+        profilePictureInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block"; // Muestra la imagen
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+                imagePreview.style.display = "none"; // Oculta la imagen si no hay archivo
+            }
+        });
+    </script>
+
 
 </html>

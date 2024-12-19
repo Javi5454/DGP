@@ -114,8 +114,8 @@ class ClassroomOrder(models.Model):
     
 
 class ClassroomOrderCollection(models.Model):
-    date = models.DateField(default=timezone.now)  # Fecha de la colección
+    task = models.ForeignKey(DinnerTask, on_delete=models.CASCADE, related_name="order_collections")
     classroom_orders = models.ManyToManyField(ClassroomOrder, related_name="collections")
 
     def __str__(self):
-        return f"Colección de comandas - Fecha: {self.date}"
+        return f"Colección de comandas - Tarea: {self.task.name}"
