@@ -10,16 +10,17 @@
     {% bootstrap_javascript %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-3">
         <h1 class="text-center mb-4 custom-title"><strong>¿EN QUÉ AULA ESTÁS?</strong></h1>
-        <div class="row justify-content-center gx-3 gy-3">
+        <div class="row justify-content-center gx-2 gy-2">
             {% for classroom in classrooms %}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 d-flex justify-content-center">
                 <a href="{% url 'tasks:dinner_task2' classroom_id=classroom.id %}" class="btn custom-btn4 w-100">
                     <div class="text-center">
-                        <img src="{{ classroom.image.url }}" class="image-preview2 mb-2">
+                        <img src="{{ classroom.image.url }}" class="image-preview2 mb-2" style="max-width: 100%; height: auto;">
                         <p><strong>{{ classroom.description }}</strong></p>
                     </div>
                 </a>
@@ -27,8 +28,16 @@
             {% endfor %}
         </div>
         <!-- Botón Confirmar -->
-        <div class="text-center">
-            <a href="{% url 'dashboard' %}" class="confirm-button">Confirmar</a>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <a href="{% url 'dashboard' %}" class="confirm-button">CONFIRMAR</a>
+            </div>
         </div>
     </div>
+
+    <a href="{% url 'dashboard' %}" class="back-link">
+        <span><i class="fa-solid fa-left-long"></i> VOLVER</span>
+    </a>
+
 </body>
+</html>

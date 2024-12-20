@@ -9,6 +9,7 @@
     {% bootstrap_javascript %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/tasks_styles.css' %}">
+    <script src="https://kit.fontawesome.com/d69b2df6b2.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="fixed-classroom-info">
@@ -20,10 +21,10 @@
         <h1 class="text-center mb-4"><strong>MENÚS</strong></h1>
         <form method="POST" action="">
             {% csrf_token %}
-            <div class="row justify-content-center">
+            <div class="row justify-content-center gx-2 gy-2"> <!-- Ajusta el espacio horizontal y vertical -->
                 {% for menu in menus %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
-                    <div class="card custom-card">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3 d-flex justify-content-center"> <!-- Más anchas con col-lg-3 -->
+                    <div class="card custom-card" style="width: 18rem;"> <!-- Estilo ancho ajustado -->
                         <img src="{{ menu.image.url }}" alt="{{ menu.description }}" class="card-img-top">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ menu.description }}</h5>
@@ -43,11 +44,17 @@
                 <p class="text-center">No hay menús disponibles.</p>
                 {% endfor %}
             </div>
-            <div class="text-center">
-                <button type="submit" class="save-button">Guardar</button>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <button type="submit" class="save-button">GUARDAR COMANDA</button>
+                </div>
             </div>
         </form>
     </div>
+
+    <a href="{% url 'tasks:dinner_task1' dinnerTask_id=taskid %}" class="back-link">
+        <span><i class="fa-solid fa-left-long"></i> VOLVER</span>
+    </a>
 
     <script>
         function updateCounter(button, change) {
@@ -58,7 +65,7 @@
 
             let count = parseInt(display.textContent) + change;
             if (count < 0) count = 0;  // Evita negativos
-            if (count > 10) count = 10;  // Límite máximo en 15
+            if (count > 10) count = 10;  // Límite máximo en 10
 
             display.textContent = count;  // Actualiza el número en el contador
             hiddenInput.value = count;    // Actualiza el valor en el input oculto
@@ -67,5 +74,7 @@
             image.src = `/static/numbers/${count}.png`;
         }
     </script>
+
+    
 </body>
 </html>

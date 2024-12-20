@@ -213,6 +213,7 @@ body {
 .pictogram-card:hover {
     transform: scale(1.05);
     text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 /* Contenido principal */
@@ -248,6 +249,11 @@ body {
     align-items: center; /* Centra horizontalmente */
     justify-content: space-between; /* Espaciado uniforme */
     color: var(--my-blue); 
+}
+
+.task-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .task-card img {

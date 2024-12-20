@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-sm-12 mb-3">
                 <div class="welcome-background">
-                    <h2 class="welcome-message px-2">Bienvenido/a, {{ request.user.get_full_name }}</h2>
+                    <h1 class="welcome-message px-2">Bienvenido/a, {{ request.user.get_full_name }}</h1>
                 </div>
             </div>
         </div>
@@ -42,46 +42,48 @@
         
         
         <div class="container-fluid mt-5">
-            <h3 style="font-weight: bold;">Tareas por pasos</h3>
+            <h3 style="font-weight: bold;">TAREAS POR PASOS</h3>
                 <!-- Mostrar tareas asignadas si existen -->
+                <div class="row row-cols-1 row-cols-md-3 g-3 justify-content-center"> <!-- Adjusted for grid layout and centered alignment -->
                     {% if tasks %}
-                        {% for task in tasks %} 
-                        <a href="{% url 'task_by_step:view_task' task_id=task.id %}", style="text-decoration: none;">
-                        <div class="row mt-4 g-0"> <!-- Reduce el espaciado con g-2 -->
-                            <div class="col-12">
+                        {% for task in tasks %}
+                        <div class="col d-flex justify-content-center"> <!-- Center each task -->
+                            <a href="{% url 'task_by_step:view_task' task_id=task.id %}" style="text-decoration: none;">
                                 <div class="task-card py-2 text-center"> <!-- Reduce padding -->
-                                    <h3 class="mt-2""><strong>{{ task.task_name }}</strong></h3>
-                                    <h3 class="small mb-2"><strong>límite: {{ task.deadline|date:"d/m/Y" }}</strong></h3>
+                                    <img src="{% static 'images/ordenar_secuencia.png' %}" alt="Tarea por pasos">
+                                    <h3 class="mt-2"><strong>{{ task.task_name|default:"Tarea por pasos"}}</strong></h3>
+                                    <h4 class="mb-2"><strong>Límite: {{ task.deadline|date:"d/m/Y" }}</strong></h4>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        </a>
                         {% endfor %}
+                    </div>
                 {% else %}
-                    <h4 class="text-center">No tienes tareas por pasos asignadas.</h4>
+                    <h4 class="text-center"><strong>No tienes tareas por pasos asignadas.</strong></h4>
                 {% endif %}
         </div>
 
 
 
         <div class="container-fluid mt-5">
-            <h3 style="font-weight: bold;">Tareas Comedor</h3>
+            <h3 style="font-weight: bold;">TAREAS COMEDOR</h3>
                 <!-- Mostrar tareas asignadas si existen -->
+                <div class="row row-cols-1 row-cols-md-3 g-3 justify-content-center"> <!-- Adjusted for grid layout and centered alignment -->
                     {% if dinner_tasks %}
-                        {% for task in dinner_tasks %} 
-                        <a href="{% url 'tasks:dinner_task1' dinnerTask_id=task.id %}", style="text-decoration: none;">
-                        <div class="row mt-4 g-0"> <!-- Reduce el espaciado con g-2 -->
-                            <div class="col-12">
+                        {% for task in dinner_tasks %}
+                        <div class="col d-flex justify-content-center"> <!-- Center each task -->
+                            <a href="{% url 'tasks:dinner_task1' dinnerTask_id=task.id %}" style="text-decoration: none;">
                                 <div class="task-card py-2 text-center"> <!-- Reduce padding -->
-                                    <h3 class="mt-2""><strong>{{ task.task_name }}</strong></h3>
-                                    <h3 class="small mb-2"><strong>límite: {{ task.deadline|date:"d/m/Y" }}</strong></h3>
+                                    <img src="{% static 'images/comedor.png' %}" alt="Comedor">
+                                    <h3 class="mt-2"><strong>{{ task.name|default:"Comanda comedor"}}</strong></h3>
+                                    <h4 class="mb-2"><strong>Límite: {{ task.deadline|date:"d/m/Y" }}</strong></h4>
                                 </div>
-                            </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                         {% endfor %}
+                </div>
                 {% else %}
-                    <h4 class="text-center">No tienes tareas de Comedor asignadas.</h4>
+                    <h4 class="text-center"><strong>No tienes tareas de Comedor asignadas.</strong></h4>
                 {% endif %}
         </div>
 </body>
